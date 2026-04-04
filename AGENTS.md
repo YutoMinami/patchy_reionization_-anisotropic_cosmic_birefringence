@@ -28,6 +28,9 @@ Before making changes, read these in order:
 - Avoid duplicating core numerical logic inside the notebook when a shared function can be reused.
 - If notebook behavior changes, update the shared module first unless the change is purely presentation.
 - Prefer the split workflow `04a` then `04b` over the older combined `04` script when runs are heavy or WSL2 stability matters.
+- For heavy scans such as `04a` or `07a`, prefer splitting the mass range into smaller chunks and resuming from saved CSV outputs instead of running the full range in one shot.
+- Once a numbered script or notebook has been used for a recorded result, prefer preserving it as-is for reproducibility.
+- If a workflow needs a correction or a better-matched rerun, add a new continued number or a clearly versioned suffix instead of silently rewriting the old numbered artifact.
 
 ## Current priorities
 
@@ -69,6 +72,12 @@ Whenever you modify the pipeline, try to verify:
 3. representative masses are converged across reasonable solver settings,
 4. heavy runs write reusable intermediate outputs to disk when feasible,
 5. any claim based on toy spectra is clearly labeled as toy-only.
+
+For long or memory-hungry runs:
+
+- write partial CSV outputs incrementally,
+- add `--resume` support when practical,
+- prefer mass-range split runs over single all-range runs on WSL2.
 
 ## Communication expectations
 

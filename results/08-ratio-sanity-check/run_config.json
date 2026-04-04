@@ -1,0 +1,50 @@
+{
+  "target": 1.0,
+  "rtau_csv": "results/04b-rtau-needed/Rtau_phi_needed_scan.csv",
+  "phi_max_csv": "results/07a-phi-amp-max-split/phi_amp_max_scan.csv",
+  "num_rows": 240,
+  "best_summary": [
+    {
+      "case_name": "nphi_1_Lcut_800",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 3.9867556065137816e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 4.01692096383975e-11
+    },
+    {
+      "case_name": "nphi_1_no_cut",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 4.35235357498932e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 4.3852851900058017e-11
+    },
+    {
+      "case_name": "nphi_2_Lcut_800",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 3.673951760221392e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 3.7017503209017547e-11
+    },
+    {
+      "case_name": "nphi_2_no_cut",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 4.067886528898739e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 4.098665754619331e-11
+    },
+    {
+      "case_name": "nphi_3_Lcut_800",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 3.273900232153385e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 3.2986718459917454e-11
+    },
+    {
+      "case_name": "nphi_3_no_cut",
+      "min_ratio_mass_eV": 5.878016072274924e-30,
+      "min_ratio": 3.673945838204732e-15,
+      "max_ratio_mass_eV": 1e-35,
+      "max_ratio": 3.701744354076793e-11
+    }
+  ]
+}

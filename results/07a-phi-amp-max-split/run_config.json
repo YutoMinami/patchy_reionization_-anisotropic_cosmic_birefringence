@@ -1,0 +1,17 @@
+{
+  "solve_config": {
+    "z_ini": 10000000.0,
+    "z_end": 0.0,
+    "method": "DOP853",
+    "rtol": 1e-07,
+    "atol_rel": 1e-10,
+    "dense_output": false,
+    "n_eval": null
+  },
+  "z_eval": 7.7,
+  "a_eval": 0.11494252873563221,
+  "f_dm": 1.0,
+  "rho_dm_eval": 1.4946302525541625e-24,
+  "rho_phi_max": 1.4946302525541625e-24,
+  "assumption": "Phenomenological bound assuming rho_phi(z_eval) <= f_dm * rho_DM(z_eval) and canonical scalar energy density proxy rho_phi = 0.5 dotphi_phys^2 + 0.5 omega^2 phi^2 in the same field units as the ODE variable."
+}
