@@ -538,13 +538,13 @@ A_{\rm unit}(m_a) \propto \dot\phi_{\rm conf}(\eta_{\rm rei})
 ### まだ分からないこと
 
 - 物理正規化後にも patchy 優勢が残るか
-- `phi_needed(m_a)` がどのような形になるか
-- `phi_amp_max(m_a)` がどのような制限を与えるか
+- $\phi_{\rm needed}(m_a)$ がどのような形になるか
+- $\phi_{\rm amp,max}(m_a)$ がどのような制限を与えるか
 - その両者に overlap があるか
 
-## 最近の更新: `07a` 完走と `phi_amp_max(m_a)` の初期結果
+## 最近の更新: `07a` 完走と $\phi_{\rm amp,max}(m_a)$ の初期結果
 
-`phi_amp_max(m_a)` を見積もる `07a` は、最初は WSL2 上で負荷が高すぎたため、そのまま一気に回す運用をやめた。
+$\phi_{\rm amp,max}(m_a)$ を見積もる `07a` は、最初は WSL2 上で負荷が高すぎたため、そのまま一気に回す運用をやめた。
 
 現在は
 
@@ -568,7 +568,7 @@ A_{\rm unit}(m_a) \propto \dot\phi_{\rm conf}(\eta_{\rm rei})
 \rho_\phi(z_{\rm eval}) \le f_{\rm DM}\,\rho_{\rm DM}(z_{\rm eval})
 ```
 
-を仮定し、`z_{\rm eval}=7.7`, `f_{\rm DM}=1` のもとで `\phi_{\rm amp,max}(m_a)` を出している。
+を仮定し、$z_{\rm eval}=7.7$, $f_{\rm DM}=1$ のもとで $\phi_{\rm amp,max}(m_a)$ を出している。
 
 ここで使っているエネルギー密度は
 
@@ -586,13 +586,13 @@ A_{\rm unit}(m_a) \propto \dot\phi_{\rm conf}(\eta_{\rm rei})
 
 高質量端を含む代表値は次の通り。
 
-- `m_a = 1.1937766417144358e-27 eV` で `phi_amp_max = 2.173177728516585e4`
-- `m_a = 2.0309176209047306e-27 eV` で `phi_amp_max = 1.9747162257012587e4`
-- `m_a = 3.455107294592232e-27 eV` で `phi_amp_max = 1.750035228137274e4`
-- `m_a = 5.878016072274924e-27 eV` で `phi_amp_max = 1.5748702119865331e4`
-- `m_a = 1.0e-26 eV` で `phi_amp_max = 1.3805832311163542e4`
+- $m_a = 1.1937766417144358\times10^{-27}\ {\rm eV}$ で $\phi_{\rm amp,max} = 2.173177728516585\times10^{4}$
+- $m_a = 2.0309176209047306\times10^{-27}\ {\rm eV}$ で $\phi_{\rm amp,max} = 1.9747162257012587\times10^{4}$
+- $m_a = 3.455107294592232\times10^{-27}\ {\rm eV}$ で $\phi_{\rm amp,max} = 1.750035228137274\times10^{4}$
+- $m_a = 5.878016072274924\times10^{-27}\ {\rm eV}$ で $\phi_{\rm amp,max} = 1.5748702119865331\times10^{4}$
+- $m_a = 1.0\times10^{-26}\ {\rm eV}$ で $\phi_{\rm amp,max} = 1.3805832311163542\times10^{4}$
 
-つまり、少なくとも現在の proxy では、高質量側へ行くほど `\phi_{\rm amp,max}` は緩やかに下がっていく。
+つまり、少なくとも現在の proxy では、高質量側へ行くほど $\phi_{\rm amp,max}$ は緩やかに下がっていく。
 
 この結果を読むための notebook として
 
@@ -600,7 +600,7 @@ A_{\rm unit}(m_a) \propto \dot\phi_{\rm conf}(\eta_{\rm rei})
 
 を用意し、こちらは `results/07a-phi-amp-max-split/phi_amp_max_scan.csv` を既定の入力として使うようにしている。
 
-## sanity check メモ: `phi_needed / phi_amp_max` が極端に小さいこと
+## sanity check メモ: $\phi_{\rm needed} / \phi_{\rm amp,max}$ が極端に小さいこと
 
 `07b` で見ると、少なくとも現在の phenomenological な定義では
 
@@ -612,27 +612,90 @@ A_{\rm unit}(m_a) \propto \dot\phi_{\rm conf}(\eta_{\rm rei})
 
 第一印象としては「必要振幅は許容振幅よりずっと小さいので、少なくとも current proxy では十分 allowed」という読みでよい。
 
-ただし、この比が `10^{-10}` 未満まで小さいなら、次の sanity check は必ずやっておきたい。
+ただし、この比が $10^{-10}$ 未満まで小さいなら、次の sanity check は必ずやっておきたい。
 
-1. `\phi` の単位系と canonical normalization
-   いまの ODE 変数 `\phi` が、最終的にどの物理的 field amplitude に対応しているかを改めて確認する。
-2. `\rho_\phi` の定義
+1. $\phi$ の単位系と canonical normalization
+   いまの ODE 変数 $\phi$ が、最終的にどの物理的 field amplitude に対応しているかを改めて確認する。
+2. $\rho_\phi$ の定義
    現在は
    ```math
    \rho_\phi = \frac{1}{2}\dot\phi_{\rm phys}^2 + \frac{1}{2}\omega^2\phi^2
    ```
    を使っているが、これが project 全体の field convention と完全に整合しているかを確認する。
-3. `A_unit` の定義と rescaling
-   `A(m_a;\phi_{\rm amp}) = \phi_{\rm amp} A_{\rm unit}(m_a)` の比例関係自体はよいとして、`A_unit` と `phi_amp_max` の単位が本当に同じ振幅変数を共有しているかをチェックする。
-4. `phi_needed` の由来
-   `phi_needed` は toy `C_L^{\tau\tau}` / `C_L^{\phi\phi}` の上に立つ量なので、ratio の小ささが toy setup の選び方に強く依存していないかを見る。
+3. $A_{\rm unit}$ の定義と rescaling
+   $A(m_a;\phi_{\rm amp}) = \phi_{\rm amp} A_{\rm unit}(m_a)$ の比例関係自体はよいとして、$A_{\rm unit}$ と $\phi_{\rm amp,max}$ の単位が本当に同じ振幅変数を共有しているかをチェックする。
+4. $\phi_{\rm needed}$ の由来
+   $\phi_{\rm needed}$ は toy $C_L^{\tau\tau}$ / $C_L^{\phi\phi}$ の上に立つ量なので、ratio の小ささが toy setup の選び方に強く依存していないかを見る。
 
 したがって、現時点での言い方としては
 
-- `phi_needed < phi_amp_max` であり、current proxy では viability が強く支持される
+- $\phi_{\rm needed} < \phi_{\rm amp,max}$ であり、current proxy では viability が強く支持される
 - ただし ratio が極端に小さいため、これは「勝ったので終わり」ではなく、むしろ normalization check を優先して行うべき段階
 
 という整理が適切である。
+
+## 最近の更新: matched rerun (`11` / `12`)
+
+その後、`04a` と `07a` をそのまま混ぜて比を作っていた点を避けるために、matched rerun を追加した。
+
+- `scripts/11-recompute_matched_scan.py`
+  で $A_{\rm unit}$ と $\phi_{\rm amp,max}$ を同じ高精度背景解から同時に計算
+- `scripts/12-ratio_with_matched_scan.py`
+  でその matched 出力を使って $\phi_{\rm needed} / \phi_{\rm amp,max}$ を再評価
+
+ここで大事なのは、古い `08/09/10` を上書きせず、修正版は新しい連番 `11/12` として積んだことである。
+これにより、過去の sanity check を研究ログとして残しながら、current best result を別管理できるようになった。
+
+matched 出力の正本は
+
+- `results/11-matched-scan-global-split/matched_scan.csv`
+- `results/12-ratio-with-matched-scan/matched_ratio_scan.csv`
+
+である。
+
+代表的な matched high-mass values は
+
+- $m_a = 2.0309176209047306\times10^{-27}\ {\rm eV}$ で
+  - $A_{\rm unit} = 1.10500484397749\times10^{10}$
+  - $\phi_{\rm amp,max} = 1.8124866292836112\times10^{4}$
+- $m_a = 5.878016072274924\times10^{-27}\ {\rm eV}$ で
+  - $A_{\rm unit} = 1.3935403275476799\times10^{10}$
+  - $\phi_{\rm amp,max} = 1.449744448872209\times10^{4}$
+- $m_a = 1.0\times10^{-26}\ {\rm eV}$ で
+  - $A_{\rm unit} = -2.632126036501822\times10^{9}$
+  - $\phi_{\rm amp,max} = 1.288191649163101\times10^{4}$
+
+である。
+
+そして最も重要なのは、matched rerun でも結論が変わらなかったことだ。
+
+$R_{\rm target} = 1$ の場合、`12` の ratio は各 toy case で
+
+- 最小でもおよそ $3.5\times10^{-15}$ から $4.7\times10^{-15}$
+- 最大でもおよそ $3.3\times10^{-11}$ から $4.4\times10^{-11}$
+
+であり、依然として
+
+```math
+\phi_{\rm needed} \ll \phi_{\rm amp,max}
+```
+
+である。
+
+つまり、少なくとも現在の phenomenological bound と toy-spectrum setup の下では、
+
+- patchy dominance に必要な振幅は極めて小さい
+- しかもその結論は mixed-solver artifact ではなかった
+
+というところまで到達している。
+
+この時点で次の課題は、scan の再計算そのものではなく、
+
+- この結果をどこまで robust claim として言えるか
+- どこから先が toy/model-dependent caveat か
+- 観測制限 $A_{\rm CB}$ や $C_L^{\tau\tau}$ への再解釈をどう書くか
+
+を整理することである。
 
 ## 次にやるべきこと
 

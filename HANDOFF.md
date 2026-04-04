@@ -270,62 +270,80 @@ Representative toy results at that mass include:
   - `Rtau_max_unit = 3.609159e+20`
   - `L_peak = 389`
 
-Corresponding required amplitudes are already down to the `10^{-11}` to `10^{-10}` range in the toy analysis.
+Corresponding required amplitudes are already down to the $10^{-11}$ to $10^{-10}$ range in the toy analysis.
 
-This means the project is now at the point where the interesting question is no longer whether the toy patchy contribution can be large. It clearly can. The real question is whether the required amplitude is physically allowed.
+The project has now also gone through a matched rerun:
+
+- `scripts/11-recompute_matched_scan.py`
+  recomputes $A_{\rm unit}$ and $\phi_{\rm amp,max}$ from the same high-precision background solution
+- `scripts/12-ratio_with_matched_scan.py`
+  recomputes $\phi_{\rm needed} / \phi_{\rm amp,max}$ from the matched scan, without overwriting the earlier `08` sanity-check products
+
+Current matched output:
+
+- `results/11-matched-scan-global-split/matched_scan.csv`
+- `results/12-ratio-with-matched-scan/matched_ratio_scan.csv`
+
+The important point is that the matched rerun did **not** qualitatively change the conclusion:
+
+- $\phi_{\rm needed} / \phi_{\rm amp,max}$ remains far below 1 over the scanned mass range
+- for $R_{\rm target} = 1$, the matched-rerun ratio is still at the level of roughly $10^{-15}$ to $10^{-11}$
+
+So the current state of the project is:
+
+- toy patchy dominance is easy to realize in the spectrum-level model,
+- the required amplitude is tiny compared with the current phenomenological amplitude bound,
+- therefore the bottleneck is no longer basic feasibility, but rather how to formulate the paper-quality claim and its caveats.
 
 ---
 
 ## High-priority next tasks for Codex
 
-### Task 1: Physically normalize the ALP amplitude
-Use an ALP energy-density bound to map allowed amplitude vs mass.
+### Task 1: Treat `11/12` as the current best numerical result
+Do not overwrite older numbered products such as `08`, `09`, `10`.
+Those are useful as historical sanity checks.
 
-Need to impose something like
-```math
-\rho_\phi \lesssim \rho_{\phi,\max}
-```
-using
-```math
-\rho_\phi \sim \frac{1}{2}\dot\phi_{\rm phys}^2 + \frac{1}{2}m_a^2\phi^2
-```
-with appropriate units / conventions.
+The current numerically preferred chain is:
 
-Goal:
-- obtain allowed `phi_amp_max(m_a)`,
-- compare against `phi_needed(m_a)`.
+1. `04a` / `04b` for toy $\phi_{\rm needed}$
+2. `11` for matched high-precision $A_{\rm unit}$ and $\phi_{\rm amp,max}$
+3. `12` for the matched ratio $\phi_{\rm needed} / \phi_{\rm amp,max}$
 
-This comparison is likely the key “paper” result:
-- if `phi_needed < phi_amp_max` somewhere, patchy dominance is viable,
-- if `phi_needed >> phi_amp_max` everywhere, this becomes a no-go result.
+### Task 2: Turn the current result into a paper claim
+The numerics now strongly suggest:
 
-### Task 2: Refine the mass scan if needed
-The current best mass is based on a coarse grid out to `10^{-26} eV`.
-It would be useful to refine the scan around
-```math
-m_a \sim {\rm few}\times 10^{-27}\ {\rm eV}
-```
-to see whether the preferred region shifts once the grid is denser.
+- patchy dominance is toy-feasible,
+- the required amplitude is far below the current phenomenological bound,
+- and this survives the matched rerun.
 
-### Task 3: Keep checking toy-shape dependence
-Current results have already been checked for
-- `n_phi = 1, 2, 3`
-- cutoff / no cutoff
+So the next job is to phrase the result carefully:
 
-but this dependence should still be kept in mind when interpreting plots.
+- what is already robust,
+- what is still toy/model-dependent,
+- what caveats remain about normalization and $C_L^{\tau\tau}$ modeling.
+
+### Task 3: Revisit observational reinterpretation with the matched result in hand
+The natural follow-up is to reconnect this to:
+
+- anisotropic CB limits such as $A_{\rm CB}$,
+- possible reinterpretation as a bound on $A_\tau^2 C_L^{\tau\tau}$,
+- benchmark scenarios tied to isotropic CB.
+
+This should now be done using the matched-rerun understanding, not the earlier mixed `04a/07a` combination.
 
 ### Task 4: Keep cross term secondary for now
-Do not prioritize `C_L^{phi tau}` modeling yet.
+Do not prioritize $C_L^{\phi\tau}$ modeling yet.
 For now:
-- set `rho_L = 0`,
-- maybe provide an upper-envelope estimate using `|rho_L| <= 1`,
+
+- set $\rho_L = 0$,
+- maybe provide an upper-envelope estimate using $|\rho_L| \le 1$,
 - leave realistic cross modeling for later.
 
 ### Task 5: Keep the finite-width reionization issue as a TODO, not a blocker
 The current treatment uses the effective emit-time-shift approximation for `\delta\alpha_\tau`.
 This is good enough for the present feasibility and amplitude-budget stage.
 
-If the patchy term remains interesting after physical normalization, then the next physics-level refinement is to test the validity of this approximation against a finite-width reionization kernel treatment.
+If the patchy term remains interesting after the current matched analysis, then the next physics-level refinement is to test the validity of this approximation against a finite-width reionization kernel treatment.
 
 ---
 
@@ -338,16 +356,19 @@ Suggested structure:
 1. Introduction
 2. Formalism
 3. Scaling argument for patchy vs genuine term
-4. ALP background dynamics and `A_unit(m_a)`
+4. ALP background dynamics and $A_{\rm unit}(m_a)$
 5. Required amplitude for patchy dominance
 6. Physical normalization from ALP energy-density bounds
 7. Results / viability or no-go
 8. Discussion
 
 Most likely central figure:
-- `phi_needed(m_a)` for `R_tau,max = 1`
+
+- matched $\phi_{\rm needed}(m_a)$ for $R_{\tau,\max} = 1$
 vs
-- `phi_amp_max(m_a)` from physical constraints
+- matched $\phi_{\rm amp,max}(m_a)$ from the same background solutions
+
+with the old non-matched version retained only as a sanity-check appendix or internal log.
 
 ---
 
@@ -376,31 +397,20 @@ But first, keep it simple and stabilize the unit-amplitude scan.
 
 ---
 
-## Minimal outputs desired from the next Codex round
-
-Please produce:
-1. a cleaned Python script or notebook for `A_unit(m_a)` scans,
-2. convergence diagnostics at a few representative masses,
-3. `R_tau,max^unit(m_a)` from toy spectra,
-4. `phi_needed(m_a)` for target `R_tau,max = 1`,
-5. an initial attempt at physical amplitude bounds from `rho_phi`.
-
-If possible, save figures:
-- `A_unit_vs_m.png`
-- `Rtau_max_unit_vs_m.png`
-- `phi_needed_vs_m.png`
-
----
-
 ## Short summary for Codex
 
-We already established the formal decomposition and a toy numerical pipeline.
-The toy model suggests patchy dominance is plausible near `L ~ 300`, but current absolute numbers are unphysical because the ALP amplitude has not been physically normalized.
+The project has moved past the initial feasibility phase.
 
-Your next job is to turn this into a meaningful viability test by:
-- stabilizing the numerics,
-- using unit-amplitude response,
-- deriving required ALP amplitude for patchy dominance,
-- comparing it to physically allowed amplitude bounds.
+What is already in hand:
 
-That comparison is the likely core result.
+- a stable unit-response workflow,
+- toy $\phi_{\rm needed}(m_a)$,
+- a phenomenological $\phi_{\rm amp,max}(m_a)$,
+- and a matched rerun showing that the very small ratio $\phi_{\rm needed} / \phi_{\rm amp,max}$ is not an artifact of mixing two different solver setups.
+
+So the next job is no longer “make the scan work”.
+The next job is to articulate the result:
+
+- what exactly is robust already,
+- what is still phenomenological,
+- and how this feeds into observational reinterpretation and a paper narrative.
