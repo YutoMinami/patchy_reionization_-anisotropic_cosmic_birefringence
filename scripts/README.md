@@ -38,6 +38,14 @@ Important:
   Recomputes `phi_needed / phi_amp_max` using the matched `11` outputs rather than the older mixed `04a/07a` combination.
 - `12b-visualize_matched_ratio.ipynb`
   Notebook for plotting the matched-rerun ratio from `12`.
+- `13-acb_reinterpretation_with_matched.py`
+  Reinterprets the anisotropic-CB amplitude limit using the old toy Gaussian `C_L^{tau tau}` template and the matched `11` outputs.
+- `13b-visualize_acb_reinterpretation.ipynb`
+  Notebook for visualizing the `13` toy-template reinterpretation.
+- `14-patchy_template_family_bound.py`
+  Replaces the old toy Gaussian `C_L^{tau tau}` with a lightweight literature-inspired template family in `D_L^{tau tau}` and recomputes the simplified anisotropic-CB reinterpretation.
+- `14b-visualize_patchy_template_family.ipynb`
+  Notebook for plotting the template family and the allowed peak `D_L^{tau tau}` normalization from `14`.
 
 ## Recommended order
 
@@ -51,6 +59,10 @@ Important:
 8. `11-recompute_matched_scan.py`
 9. `12-ratio_with_matched_scan.py`
 10. `12b-visualize_matched_ratio.ipynb`
+11. `13-acb_reinterpretation_with_matched.py`
+12. `13b-visualize_acb_reinterpretation.ipynb`
+13. `14-patchy_template_family_bound.py`
+14. `14b-visualize_patchy_template_family.ipynb`
 
 ## Typical commands
 
@@ -67,6 +79,8 @@ Important:
 ./.venv/bin/python scripts/11-recompute_matched_scan.py --mass-min 1e-30 --mass-max 1e-28 --resume --no-show --output-dir results/11-matched-scan-global-split
 ./.venv/bin/python scripts/11-recompute_matched_scan.py --mass-min 1e-28 --resume --no-show --output-dir results/11-matched-scan-global-split
 ./.venv/bin/python scripts/12-ratio_with_matched_scan.py --no-show
+./.venv/bin/python scripts/13-acb_reinterpretation_with_matched.py --no-show
+./.venv/bin/python scripts/14-patchy_template_family_bound.py --no-show
 ```
 
 ## Output files
@@ -109,6 +123,24 @@ Important:
 - `results/12-ratio-with-matched-scan/run_config.json`
 - `results/12-ratio-with-matched-scan/summary.md`
 
+`13-acb_reinterpretation_with_matched.py` writes:
+
+- `results/13-acb-reinterpretation/acb_reinterpretation_scan.csv`
+- `results/13-acb-reinterpretation/acb_reinterpretation_summary.csv`
+- `results/13-acb-reinterpretation/claa_limit.png`
+- `results/13-acb-reinterpretation/template_scale_limit_*.png`
+- `results/13-acb-reinterpretation/run_config.json`
+- `results/13-acb-reinterpretation/summary.md`
+
+`14-patchy_template_family_bound.py` writes:
+
+- `results/14-patchy-template-family/template_family_shapes.csv`
+- `results/14-patchy-template-family/template_family_bound_summary.csv`
+- `results/14-patchy-template-family/template_family_shapes.png`
+- `results/14-patchy-template-family/dpeak_limit_vs_lpeak_*.png`
+- `results/14-patchy-template-family/run_config.json`
+- `results/14-patchy-template-family/summary.md`
+
 This split workflow is intended to avoid losing everything when the heavy `A_unit` scan is interrupted.
 
 ## Notes
@@ -117,6 +149,7 @@ This split workflow is intended to avoid losing everything when the heavy `A_uni
 - `07a` can also be expensive because it re-solves the ALP background for each mass.
 - `11` is also expensive because it recomputes both `A_unit` and `phi_amp_max` from the same high-precision solution.
 - `04b` should be comparatively light because it only post-processes saved `A_unit` values.
+- `13` and `14` are lightweight reinterpretation steps that reuse saved matched outputs.
 - On WSL2, prefer running `07a` in mass chunks with `--mass-min`, `--mass-max`, and `--resume`.
 - On WSL2, prefer running `11` in mass chunks or exact-mass jobs using `--mass-min`, `--mass-max`, or `--masses`.
 - Core numerical logic should live in `../patchy_reionization.py`, not be reimplemented separately in each script.

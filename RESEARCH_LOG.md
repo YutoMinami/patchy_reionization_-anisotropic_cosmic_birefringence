@@ -236,6 +236,85 @@ A(m_a; \phi_{\rm amp}) = \phi_{\rm amp} A_{\rm unit}(m_a)
 
 ## 最近の重要な結果
 
+### 結果 0: `14` で何を simplify / approximate したか
+
+anisotropic CB からの制限を `C_L^{\tau\tau}` へ読み替える段階で、toy Gaussian を
+そのまま使うのは強すぎて物理的主張にしにくいと判断した。
+
+そこで `14` では、いきなり Dvorkin-Smith 系の full integral を実装する代わりに、
+次の軽量 surrogate を使った。
+
+- `C_L^{\tau\tau}` ではなく
+  $D_L^{\tau\tau} \equiv L(L+1)C_L^{\tau\tau}/2\pi$
+  を template の主変数にする
+- `D_L^{\tau\tau}` の形は lognormal bump
+  ```math
+  D_L^{\tau\tau} \propto
+  \exp\left[
+    -\frac{1}{2}
+    \left(\frac{\ln(L/L_{\rm peak})}{\sigma_{\ln L}}\right)^2
+  \right]
+  ```
+  で近似する
+- 文献で想定される bubble-scale の不確かさを模して
+  $L_{\rm peak}$ と $\sigma_{\ln L}$ を振る
+- 各 template は「peak amplitude が 1 の shape」として定義し、
+  anisotropic CB の budget から許される peak normalization を逆算する
+
+この近似で捨てているものは次の通り。
+
+- bubble model から出る full line-of-sight integral
+- reionization history と bubble distribution の詳細な物理対応
+- strict な意味での Dvorkin-Smith exact template
+
+残しているものは次の通り。
+
+- patchy template が low-$L$ か high-$L$ かで制限の強さが変わること
+- 幅の広い / 狭い template で constrained multipole window への重なり方が変わること
+- toy Gaussian 1本に依存しない family-level の傾向
+
+つまり `14` は
+
+- realistic prediction
+ではなく、
+- literature-inspired template family を使った simplified reinterpretation
+
+である。
+
+### 次段階の方針: `A` と `R_{\rm eff}` を使う surrogate へ進む
+
+その後、Dvorkin-Smith の `B. Reionization model parameters` を見直すと、
+`C_L^{\tau\tau}` の見え方は 5 個の reionization parameter
+
+- `{ \tau, \Delta y }`
+- `{ b, \bar R, \sigma_{\ln R} }`
+
+が独立にそのまま見えるというより、少数の可観測な組み合わせで整理する方が自然だと分かった。
+
+少なくともこの節の読みでは、
+
+- `{ \tau, \Delta y }` は主に全体振幅を決めるが、別々というより observable amplitude `A` として見るべき
+- `{ \bar R, \sigma_{\ln R} }` は主にピーク位置を決め、Eq.(78) の
+  ```math
+  R_{\rm eff} = \bar R \exp(4\sigma_{\ln R}^2)
+  ```
+  が有効な代表スケールになる
+- `b` は振幅側に効くが、他の振幅パラメータとかなり縮退する
+
+という整理になる。
+
+したがって、次の本命は
+
+- 振幅を自由な unit-peak normalization にしない
+- Dvorkin-Smith の observable amplitude `A` を使う
+- ピーク位置は自由な `L_peak` ではなく `R_{\rm eff}` から与える
+- 形そのものは軽量の lognormal surrogate に残す
+
+という `A + R_{\rm eff}` surrogate である。
+
+この意味で、`14` は shape sensitivity を見る補助結果として残し、
+次の `15` を本命の文献寄り近似として扱うのがよい。
+
 ### 結果 1: 安定版 feasibility scan
 
 安定版の script で feasibility scan を回したところ、定性的には以前の見通しを再現しました。

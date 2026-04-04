@@ -1,0 +1,61 @@
+{
+  "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+  "A_cb_limit": 0.0001,
+  "args": {
+    "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+    "A_cb_limit": 0.0001,
+    "L_min": 2,
+    "L_max": 100,
+    "ctau0": 1e-10,
+    "cphi0": 1e-10,
+    "Lc": 300.0,
+    "sigmaL": 100.0,
+    "Lstar": 300.0,
+    "nphi_values": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "include_cutoff": true,
+    "Lcut": 800.0,
+    "selected_masses": [
+      2.0309176209047306e-27,
+      5.878016072274924e-27,
+      1e-26
+    ],
+    "output_dir": "results/13-acb-reinterpretation",
+    "no_show": true
+  },
+  "selected_rows": [
+    {
+      "mass_eV": "2.0309176209047306e-27",
+      "A_unit": "11050048439.7749",
+      "phi_unit_at_eval": "-8.21403863454595e-06",
+      "dphi_dx_unit_at_eval": "2.9147533891951114",
+      "dotphi_phys_unit_at_eval": "9.196241977258707e-17",
+      "rho_unit_at_eval": "4.54971450570855e-33",
+      "rho_phi_max_at_eval": "1.4946302525541625e-24",
+      "phi_amp_max": "18124.866292836112"
+    },
+    {
+      "mass_eV": "5.878016072274924e-27",
+      "A_unit": "13935403275.476799",
+      "phi_unit_at_eval": "-3.112069181339597e-06",
+      "dphi_dx_unit_at_eval": "3.6758448751039223",
+      "dotphi_phys_unit_at_eval": "1.1597536542073187e-16",
+      "rho_unit_at_eval": "7.111330442720145e-33",
+      "rho_phi_max_at_eval": "1.4946302525541625e-24",
+      "phi_amp_max": "14497.44448872209"
+    },
+    {
+      "mass_eV": "1e-26",
+      "A_unit": "-2632126036.501822",
+      "phi_unit_at_eval": "-8.715741575257392e-06",
+      "dphi_dx_unit_at_eval": "-0.6942954438160513",
+      "dotphi_phys_unit_at_eval": "-2.1905485825007594e-17",
+      "rho_unit_at_eval": "9.006847500577256e-33",
+      "rho_phi_max_at_eval": "1.4946302525541625e-24",
+      "phi_amp_max": "12881.91649163101"
+    }
+  ]
+}

@@ -24,16 +24,160 @@
 - $\phi_{\rm amp,max}$ の energy-density interpretation
 - finite-width reionization kernel を省いた emit-time-shift 近似
 
+## anisotropic CB constraint をどう読むか
+
+ここは論文の主張としてかなり大事な部分で、まず一般論と benchmark 依存部分を分けて書くのがよい。
+
+### 一般論として言えること
+
+観測が直接制限しているのは genuine ALP term 単独ではなく、全 birefringence power
+
+```math
+C_L^{\alpha\alpha}
+=
+A_\phi^2 C_L^{\phi\phi}
++
+A_\tau^2 C_L^{\tau\tau}
++
+2 A_\phi A_\tau C_L^{\phi\tau}
+```
+
+である。
+
+したがって、もし patchy-induced effective term が無視できないなら、
+「既存の anisotropic CB constraint は $C_L^{\phi\phi}$ にそのままかかっている」
+という読みは一般には正しくない。
+
+特に $C_L^{\phi\tau}=0$ を置いても、観測が制限するのは
+
+```math
+A_\phi^2 C_L^{\phi\phi} + A_\tau^2 C_L^{\tau\tau}
+```
+
+の和であり、$C_L^{\tau\tau}$ が大きいほど genuine term に許される余地は小さくなる。
+
+### まだ benchmark が必要なこと
+
+一方で、数値的に「どれだけ制限が強くなるか」は $C_L^{\tau\tau}$ の形や正規化に依る。
+
+つまり、
+
+- 一般論としては「和に制限がかかる」と言える
+- しかし数値的な bound の強さを言うには representative な $C_L^{\tau\tau}$ template が必要
+
+という二段構えになる。
+
+この意味で、論文の主張として最も安全なのは
+
+1. 既存 anisotropic CB constraint は total birefringence power への制限として読むべき
+2. patchy term があれば、genuine ALP term に使える budget は減る
+3. representative templates では、この再解釈は数値的にも重要になりうる
+
+という形である。
+
+### 何を避けるべきか
+
+現段階では、realistic $C_L^{\tau\tau}$ をまだ確定していないので、
+
+- model-independent を装って specific $C_L^{\tau\tau}$ bound を強く主張すること
+- 既存の $A_{\rm CB}$ constraint を無条件に $C_L^{\tau\tau}$ 単独へ写すこと
+
+は避けた方がよい。
+
+むしろ、
+
+- 本体では general reinterpretation
+- 後半では benchmark/template-based illustration
+
+という構成が自然である。
+
+## patchy $C_L^{\tau\tau}$ template をどう置くか
+
+ここは次の具体作業として重要だが、現時点では「独立な複数モデルを並べる」より、
+まず Dvorkin-Smith (2009) 系の patchy-$\tau$ family を 1 つ採用し、その中で
+代表パラメータを振る方が自然である。
+
+Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-Smith と無関係な
+全く別 family というより、同系統の bubble-based prescription を更新したものと
+見なすのがよい。
+
+したがって、paper 上の safest framing は
+
+1. Dvorkin-Smith 系を representative patchy template family として採用する
+2. bubble radius, duration, normalization などを振って幅を見る
+3. Roy などの後続文献は「同系統 family に対する updated astrophysical input / 振幅感」
+   の参照として使う
+
+という形である。
+
+## 実装方針: いきなり厳密積分へ行かない
+
+見たところ、realistic な $C_L^{\tau\tau}$ は line-of-sight 的な積分や bubble-model の
+積分を通して出てくるため、そのまま厳密に実装するとかなり重い可能性が高い。
+
+このため、次の段階ではいきなり full integral を実装するのではなく、
+
+- 文献の代表図や代表スケールに合わせた lightweight template family
+- peak multipole, width, normalization を持つ phenomenological surrogate
+- 必要なら低L・高L の傾きを文献風に寄せた broken-power-law / lognormal 近似
+
+をまず試すのがよい。
+
+つまり、
+
+- 第1段階: literature-inspired but lightweight template family
+- 第2段階: 必要なら Dvorkin-Smith 系の積分実装
+- 第3段階: その後に visibility Gaussian 近似で emit-time-shift の限界を点検
+
+の順で進めるのが、安全で再現性も高い。
+
+`14` ではこの方針に沿って、
+
+- $D_L^{\tau\tau}$ を unit-peak の lognormal bump family で近似し
+- $L_{\rm peak}$ と $\sigma_{\ln L}$ を振り
+- 観測 window にどれだけ重なるかで allowed normalization がどう変わるか
+
+を見るところまで進めた。
+
+ここでの主張は、
+
+- exact Dvorkin-Smith template を再現した
+ではなく、
+- toy Gaussian 1本だけに依らず、文献系 patchy family を意識しても
+  anisotropic CB reinterpretation は依然かなり強い
+
+という、family-level の傾向である。
+
+ただし `14` の unit-peak normalization は、shape 依存性を見る補助結果としては useful でも、
+振幅の任意性が大きすぎて本命の physical claim にはしにくい。
+
+したがって次の本命は、
+
+- Dvorkin-Smith の `B. Reionization model parameters` の整理に従い
+- observable amplitude `A` で振幅を固定し
+- Eq.(78) の `R_{\rm eff} = \bar R \exp(4\sigma_{\ln R}^2)` で代表スケールを与え
+- その上で shape だけを lognormal surrogate で軽量化する
+
+という `A + R_{\rm eff}` surrogate である。
+
+この方針なら、
+
+- `14` の「shape family を見る」利点を残しつつ
+- 振幅は free normalization ではなく文献の observable combination に縛る
+
+ことができる。
+
 ## 一番自然な paper storyline
 
 1. 異方的 CB を $\alpha_\phi + \alpha_\tau$ に分解する
 2. patchy term は effective emission-time shift として現れる
 3. toy spectra で $R_\tau(L)$ を見ると、bubble-scale multipole 付近で patchy dominance がありうる
-4. required amplitude $\phi_{\rm needed}(m_a)$ を作る
-5. phenomenological amplitude bound $\phi_{\rm amp,max}(m_a)$ を作る
-6. matched rerun で solver-mixing の疑いを潰す
-7. その上でも $\phi_{\rm needed} / \phi_{\rm amp,max}$ は十分小さい
-8. よって patchy contribution は current proxy では strongly viable
+4. 既存 anisotropic CB constraint は total birefringence power にかかることを整理する
+5. required amplitude $\phi_{\rm needed}(m_a)$ を作る
+6. phenomenological amplitude bound $\phi_{\rm amp,max}(m_a)$ を作る
+7. matched rerun で solver-mixing の疑いを潰す
+8. その上でも $\phi_{\rm needed} / \phi_{\rm amp,max}$ は十分小さい
+9. よって patchy contribution は current proxy では strongly viable
 
 ## figure 候補
 
@@ -74,6 +218,10 @@ We show that a patchy-reionization-induced effective birefringence term can domi
 
 The key question is not whether an effective patchy contribution exists formally, but whether it can be large enough to matter after the ALP background amplitude is physically constrained.
 
+### introduction 的な別案
+
+Existing anisotropic cosmic-birefringence constraints should be interpreted as limits on the total birefringence power, not automatically as limits on the genuine ALP fluctuation term alone, if patchy reionization induces an additional effective contribution.
+
 ### discussion 的な一文
 
 The remaining uncertainty is not the numerical stability of the background solver, but the degree to which the present toy $C_L^{\tau\tau}$ and phenomenological amplitude bound capture the realistic reionization and ALP parameter space.
@@ -83,4 +231,7 @@ The remaining uncertainty is not the numerical stability of the background solve
 1. `README` / `RESEARCH_LOG` / `HANDOFF` を current best result にそろえる
 2. matched `12` を見ながら paper figure 候補を固定する
 3. $A_{\rm CB}$ 再解釈を matched result に基づいて書き直す
-4. 必要なら realistic $C_L^{\tau\tau}$ の benchmark を1本だけ追加する
+4. Dvorkin-Smith 系 inspired の lightweight $C_L^{\tau\tau}$ family を1つ用意する
+5. unit-peak ではなく `A + R_{\rm eff}` surrogate に置き換える
+6. その surrogate で anisotropic CB reinterpretation をやり直す
+7. 必要ならその後に full integral か visibility Gaussian approximation に進む
