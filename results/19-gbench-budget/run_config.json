@@ -1,0 +1,28 @@
+{
+  "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+  "mass": 5.878016072274924e-27,
+  "L_min": 2,
+  "L_max": 1000,
+  "A_cb_limit": 0.0001,
+  "genuine_limit_fraction": 0.3,
+  "tau": 0.084,
+  "delta_y": 19.0,
+  "Rbar": 5.0,
+  "siglnR": 0.693,
+  "dpeak_fid": 2.9e-05,
+  "siglnl_scale": 1.0,
+  "z_max": 40.0,
+  "n_z": 5000,
+  "z_min_a": 0.1,
+  "delta_tau_values": [
+    0.05,
+    0.084,
+    0.11
+  ],
+  "g_values": [
+    1.4e-12,
+    4e-12
+  ],
+  "output_dir": "results/19-gbench-budget",
+  "no_show": true
+}

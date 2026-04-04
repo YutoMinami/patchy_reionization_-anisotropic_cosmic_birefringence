@@ -1,0 +1,24 @@
+{
+  "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+  "mass": 5.878016072274924e-27,
+  "L_min": 2,
+  "L_max": 1000,
+  "A_cb_limit": 0.0001,
+  "tau": 0.084,
+  "delta_y": 19.0,
+  "Rbar": 5.0,
+  "siglnR": 0.693,
+  "dpeak_fid": 2.9e-05,
+  "siglnl_scale": 1.0,
+  "delta_tau": 0.084,
+  "delta_tau_fid": 0.084,
+  "z_max": 40.0,
+  "n_z": 5000,
+  "z_min_a": 0.1,
+  "g_values": [
+    1.4e-12,
+    4e-12
+  ],
+  "output_dir": "results/20-atau-normalization-check",
+  "no_show": true
+}

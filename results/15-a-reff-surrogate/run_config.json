@@ -1,0 +1,66 @@
+{
+  "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+  "A_cb_limit": 0.0001,
+  "args": {
+    "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+    "A_cb_limit": 0.0001,
+    "L_min": 2,
+    "L_max": 100,
+    "selected_masses": [
+      2.0309176209047306e-27,
+      5.878016072274924e-27,
+      1e-26
+    ],
+    "tau_values": [
+      0.068,
+      0.11
+    ],
+    "delta_y_values": [
+      14.7,
+      19.0
+    ],
+    "b_values": [
+      1.0,
+      2.0
+    ],
+    "rbar_values": [
+      5.0,
+      6.0,
+      8.0
+    ],
+    "siglnr_values": [
+      0.409,
+      0.541,
+      0.693
+    ],
+    "z_max": 40.0,
+    "n_z": 5000,
+    "z_min_a": 0.1,
+    "a_fid_target": 0.07,
+    "tau_fid": 0.068,
+    "delta_y_fid": 19.0,
+    "b_fid": 1.0,
+    "dpeak_fid": 2.5e-05,
+    "siglnl_scale": 1.0,
+    "output_dir": "results/15-a-reff-surrogate",
+    "no_show": true
+  },
+  "a_cache": {
+    "tau_0.068000_dy_14.700000": {
+      "A_raw": 1.626092896024875e-07,
+      "z_re": 9.638258663672683
+    },
+    "tau_0.068000_dy_19.000000": {
+      "A_raw": 2.1127256910811885e-07,
+      "z_re": 9.593704306315757
+    },
+    "tau_0.110000_dy_14.700000": {
+      "A_raw": 2.6035382373253656e-07,
+      "z_re": 13.499959947601226
+    },
+    "tau_0.110000_dy_19.000000": {
+      "A_raw": 3.377386870055315e-07,
+      "z_re": 13.494860847362638
+    }
+  }
+}

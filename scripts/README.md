@@ -153,3 +153,45 @@ This split workflow is intended to avoid losing everything when the heavy `A_uni
 - On WSL2, prefer running `07a` in mass chunks with `--mass-min`, `--mass-max`, and `--resume`.
 - On WSL2, prefer running `11` in mass chunks or exact-mass jobs using `--mass-min`, `--mass-max`, or `--masses`.
 - Core numerical logic should live in `../patchy_reionization.py`, not be reimplemented separately in each script.
+
+## Later scripts
+
+- `15-a_reff_surrogate_bound.py`
+  Dvorkin-Smith の `A + R_{\rm eff}` surrogate で `C_L^{\tau\tau}` template を作り、anisotropic-CB reinterpretation を更新する。
+- `15b-visualize_a_reff_surrogate.ipynb`
+  `15` の surrogate shape と制限図を見る notebook。
+- `16-check_ds_figure_reproduction.py`
+  Dvorkin-Smith の図を surrogate で目視再現できるかを試す最初のチェック。
+- `16b-visualize_ds_figure_reproduction.ipynb`
+  `16` の再現図と paper image を並べて見る notebook。
+- `17-check_ds_figure_reproduction_corrected.py`
+  Fig.16 / Fig.18 のパラメータと軸を補正した図再現チェック。
+- `17b-visualize_ds_figure_reproduction_corrected.ipynb`
+  `17` の corrected figure check を見る notebook。
+- `18-deltatau_variation_budget.py`
+  `\Delta\tau` の variation だけで `C_L^{\tau\tau}` と birefringence budget を描く簡約チェック。
+- `18b-visualize_deltatau_variation_budget.ipynb`
+  `18` の図と表をまとめて見る notebook。
+- `19-gbench_budget.py`
+  Chandra の `g_{a\gamma\gamma}` benchmark を入れて raw / physical の違いを切り分ける。
+- `19b-visualize_gbench_budget.ipynb`
+  `19` の raw / physical budget を見る notebook。
+- `20-check_atau_normalization.py`
+  `A_\tau` が大きすぎる原因を field-unit factor の観点から点検する。
+- `20b-visualize_atau_normalization.ipynb`
+  `20` の正規化チェックを図で確認する notebook。
+- `21-check_natural_unit_normalization.py`
+  matched quantity を canonical natural units に写して `A_\tau` の大きさを再評価する。
+- `21b-visualize_natural_unit_normalization.ipynb`
+  `21` の natural-unit summary を確認する notebook。
+- `22-natural_unit_budget.py`
+  `21` の natural-unit `A_\tau` を使って `D_L^{\alpha\alpha}` budget を描き直す。
+- `22b-visualize_natural_unit_budget.ipynb`
+  `22` の自然単位 budget 図を確認する notebook。
+
+## Current takeaway after `21/22`
+
+- huge な `C_L^{\alpha\alpha}` は、主に mixed-unit な `A_\tau` をそのまま observable に入れていたことに由来していた。
+- `21` の自然単位化では、matched mass `m_a = 5.878016e-27 eV` で `A_\tau \simeq 0.157` for `g=1.4e-12 GeV^{-1}`、`A_\tau \simeq 0.448` for `g=4.0e-12 GeV^{-1}` になった。
+- `22` では patchy contribution の最大値が anisotropic-CB limit に対して、`g=1.4e-12` で約 `1.2%`、`g=4.0e-12` でも約 `10%` に収まり、前の absurdly large な budget は unit-system mismatch が主因だったことが強く示唆される。
+

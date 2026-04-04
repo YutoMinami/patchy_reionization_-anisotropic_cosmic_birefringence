@@ -23,6 +23,16 @@
 - $C_L^{\phi\phi}$ の toy power-law choice
 - $\phi_{\rm amp,max}$ の energy-density interpretation
 - finite-width reionization kernel を省いた emit-time-shift 近似
+- $g_{a\gamma}$ を抜いた raw response と physical observable の切り分け
+
+補足:
+
+- $A_{\rm unit}$ と $\phi_{\rm amp}$ から作る quantity は、まだ $g_{a\gamma}$ を抜いた raw response である
+- $R_\tau$ のような ratio ではそれでよいが、
+  absolute な $C_L^{\alpha\alpha}$ budget と比べるときは
+  $A_\tau = -(g_{a\gamma}/2)\phi_{\rm amp} A_{\rm unit}$ を使う必要がある
+- したがって、anisotropic CB limit との比較では
+  coupling を入れた physical normalization を明示しないと overclaim になりやすい
 
 ## anisotropic CB constraint をどう読むか
 
@@ -119,7 +129,7 @@ Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-S
 
 - 文献の代表図や代表スケールに合わせた lightweight template family
 - peak multipole, width, normalization を持つ phenomenological surrogate
-- 必要なら低L・高L の傾きを文献風に寄せた broken-power-law / lognormal 近似
+- 必要なら低L・高L の傾きを文献風に寄せた broken-power-law / log-normal 近似
 
 をまず試すのがよい。
 
@@ -133,7 +143,7 @@ Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-S
 
 `14` ではこの方針に沿って、
 
-- $D_L^{\tau\tau}$ を unit-peak の lognormal bump family で近似し
+- $D_L^{\tau\tau}$ を unit-peak の log-normal bump family で近似し
 - $L_{\rm peak}$ と $\sigma_{\ln L}$ を振り
 - 観測 window にどれだけ重なるかで allowed normalization がどう変わるか
 
@@ -154,11 +164,11 @@ Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-S
 したがって次の本命は、
 
 - Dvorkin-Smith の `B. Reionization model parameters` の整理に従い
-- observable amplitude `A` で振幅を固定し
-- Eq.(78) の `R_{\rm eff} = \bar R \exp(4\sigma_{\ln R}^2)` で代表スケールを与え
-- その上で shape だけを lognormal surrogate で軽量化する
+- observable amplitude $A$ で振幅を固定し
+- Eq.(78) の $R_{\rm eff} = \bar R \exp(4\sigma_{\ln R}^2)$ で代表スケールを与え
+- その上で shape だけを log-normal surrogate で軽量化する
 
-という `A + R_{\rm eff}` surrogate である。
+という $A + R_{\rm eff}$ surrogate である。
 
 この方針なら、
 
@@ -232,6 +242,34 @@ The remaining uncertainty is not the numerical stability of the background solve
 2. matched `12` を見ながら paper figure 候補を固定する
 3. $A_{\rm CB}$ 再解釈を matched result に基づいて書き直す
 4. Dvorkin-Smith 系 inspired の lightweight $C_L^{\tau\tau}$ family を1つ用意する
-5. unit-peak ではなく `A + R_{\rm eff}` surrogate に置き換える
+5. unit-peak ではなく $A + R_{\rm eff}$ surrogate に置き換える
 6. その surrogate で anisotropic CB reinterpretation をやり直す
 7. 必要ならその後に full integral か visibility Gaussian approximation に進む
+
+## $21/22$ 以後の framing
+
+`19` までの raw / naive physical budget は、結局のところ unit-system mismatch をかなり含んでいた。
+したがって、これ以後の paper claim は $21/22$ を正本にして組み立てるべきである。
+
+具体的には、matched mass 付近で natural-unit に写すと
+
+- $A_\tau \simeq 0.157$ for $g = 1.4 \times 10^{-12}\,{\rm GeV}^{-1}$
+- $A_\tau \simeq 0.448$ for $g = 4.0 \times 10^{-12}\,{\rm GeV}^{-1}$
+
+となり、`22` の $D_L^{\alpha\alpha}$ budget では patchy term の最大は anisotropic-CB limit の
+約 $1.2\%$ から $10\%$ に収まる。
+
+したがって、少なくとも Chandra benchmark coupling の範囲では、
+
+- patchy term は absurdly excluded ではない
+- むしろ percent-to-ten-percent level の budget を使う可能性がある
+- 以後の主張は「巨大すぎる patchy term」ではなく「見落とされやすい subdominant だが non-negligible な patchy contribution」
+
+として組み立てる方が自然である。
+
+## 次の実務の更新
+
+1. `22` を現在の正本 budget plot として採用する
+2. anisotropic-CB reinterpretation は raw quantity ではなく natural-unit quantity でやり直す
+3. Dvorkin-Smith 系 template の normalisation をもっと物理的に寄せる
+4. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ のベンチマークを追加する

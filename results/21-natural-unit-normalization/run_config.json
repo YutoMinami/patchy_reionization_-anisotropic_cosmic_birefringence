@@ -1,0 +1,12 @@
+{
+  "matched_csv": "results/11-matched-scan-global-split/matched_scan.csv",
+  "mass": 5.878016072274924e-27,
+  "z_eval": 7.7,
+  "f_dm": 1.0,
+  "g_values": [
+    1.4e-12,
+    4e-12
+  ],
+  "output_dir": "results/21-natural-unit-normalization",
+  "no_show": true
+}

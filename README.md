@@ -32,9 +32,9 @@ A_\phi^2 C_L^{\phi\phi}
 
 実際の研究上の問いは、「ALP 背景場を物理的に正規化した後でも patchy 項が優勢になりうるか」です。
 
-## `\alpha_\phi` と `\alpha_\tau` の分解
+## $\alpha_\phi$ と $\alpha_\tau$ の分解
 
-このプロジェクトでは、観測される anisotropic CB の揺らぎ `\alpha(\hat n)` を
+このプロジェクトでは、観測される anisotropic CB の揺らぎ $\alpha(\hat n)$ を
 
 ```math
 \alpha(\hat n) = \alpha_\phi(\hat n) + \alpha_\tau(\hat n)
@@ -42,9 +42,9 @@ A_\phi^2 C_L^{\phi\phi}
 
 と分けて考えます。
 
-- `\alpha_\phi`
+- $\alpha_\phi$
   ALP fluctuation そのものに由来する、本来の anisotropic CB 成分
-- `\alpha_\tau`
+- $\alpha_\tau$
   patchy reionization による有効的な scattering time のずれを通して生じる成分
 
 このとき角度パワースペクトルは
@@ -77,21 +77,21 @@ A_\tau^2 C_L^{\tau\tau}
 
 それぞれの意味は次の通りです。
 
-- `A_\phi^2 C_L^{\phi\phi}`
+- $A_\phi^2 C_L^{\phi\phi}$
   genuine な ALP 起源の anisotropic CB
-- `A_\tau^2 C_L^{\tau\tau}`
+- $A_\tau^2 C_L^{\tau\tau}$
   patchy reionization による有効 birefringence 項
-- `2 A_\phi A_\tau C_L^{\phi\tau}`
+- $2 A_\phi A_\tau C_L^{\phi\tau}$
   両者が相関しているときに現れる cross term
 
-現段階では、主な関心は `\alpha_\tau` の自己相関項が `\alpha_\phi` の自己相関項に勝てるかどうかにあります。
+現段階では、主な関心は $\alpha_\tau$ の自己相関項が $\alpha_\phi$ の自己相関項に勝てるかどうかにあります。
 
 ## 現在の理解
 
 - 定式化自体は `HANDOFF.md` に整理されています。
-- toy spectrum を使った初期検証では、bubble scale に対応する `L ~ 300` 付近で patchy 項が優勢になりうることが示唆されています。
-- ただし、これまでに出ていた非常に大きな `R_tau` は ALP 振幅の物理正規化前の値であり、そのまま物理的主張には使えません。
-- 元の feasibility notebook では、`phi_ini` を小さくすると応答係数 `A` が線形に縮まず、場合によっては符号まで反転する問題がありました。
+- toy spectrum を使った初期検証では、bubble scale に対応する $L \sim 300$ 付近で patchy 項が優勢になりうることが示唆されています。
+- ただし、これまでに出ていた非常に大きな $R_\tau$ は ALP 振幅の物理正規化前の値であり、そのまま物理的主張には使えません。
+- 元の feasibility notebook では、$phi_ini$ を小さくすると応答係数 $A$ が線形に縮まず、場合によっては符号まで反転する問題がありました。
 - この問題は現在、物理ではなく数値設定に由来するものだと分かっています。
 
 ## 安定な計算方針
@@ -104,10 +104,10 @@ A(m_a) = \dot{\phi}_{\rm conf}(\eta_{\rm rei}) \frac{d\eta}{d\tau}
 
 として評価します。
 
-背景 ODE は `phi` に対して線形なので、推奨するワークフローは次の通りです。
+背景 ODE は $\phi$ に対して線形なので、推奨するワークフローは次の通りです。
 
-1. `phi_ini = 1` で一度だけ解く
-2. その解から `A_unit(m_a)` を定義する
+1. $phi_ini = 1$ で一度だけ解く
+2. その解から $A_unit(m_a)$ を定義する
 3. 任意の振幅については後から線形に rescale する
 
 ```math

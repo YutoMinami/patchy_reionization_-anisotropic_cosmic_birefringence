@@ -79,8 +79,8 @@ R_\times(L)
 
 ## Interpretation
 
-- `A_phi^2 C_L^{phi phi}`: genuine ALP-induced anisotropic CB.
-- `A_tau^2 C_L^{tau tau}`: effective birefringence-like term from patchy reionization, through time-dependent ALP background.
+- $A_\phi^2 C_L^{\phi\phi}$: genuine ALP-induced anisotropic CB.
+- $A_\tau^2 C_L^{\tau\tau}$: effective birefringence-like term from patchy reionization, through time-dependent ALP background.
 - `cross term`: only relevant if ALP fluctuations and optical-depth fluctuations are correlated.
 
 The project focus shifted from “derive delta alpha_tau” to:
