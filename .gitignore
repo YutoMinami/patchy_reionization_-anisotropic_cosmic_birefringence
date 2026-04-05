@@ -11,6 +11,10 @@ wheels/
 
 # Local tooling
 .mcp.json
+.playwright-mcp/
 
 # Generated results
 results/
+
+# Local paper references
+papers/
