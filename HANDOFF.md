@@ -537,3 +537,35 @@ The next job is:
 - reformulate the paper claim around percent-to-ten-percent non-negligibility rather than dominance,
 - quantify the $C_L^{\tau\tau}$ template uncertainty and the emit-time-shift approximation error,
 - and prioritize follow-up tests near $m_{\rm res} \sim 10^{-29}$ eV, where spatial resonance remains possible.
+
+Update after `24`:
+
+- direct visibility averaging has now been checked with `24-check_visibility_averaged_aeff.py`
+- at $m_{\rm best} = 5.878016\times10^{-27}$ eV,
+  ```math
+  \frac{A_{\rm eff}}{A_{\rm unit}} \simeq 0.0148
+  ```
+  so the thin-shell response is suppressed to about 1.5%
+- at the fiducial resonance-scale mass
+  ```math
+  m_{\rm res} = 1.023963\times10^{-29}\ {\rm eV}
+  ```
+  one finds
+  ```math
+  \frac{A_{\rm eff}}{A_{\rm unit}} \simeq 0.734
+  ```
+  so the response largely survives
+
+This means the project emphasis should now shift from `$m_{\rm best}$ at thin-shell level` to
+`$m_{\rm res}$ with finite-width visibility weighting`.
+
+**Implication for `21`/`22` results at $m_{\rm best}$:**
+The `21`/`22` budget used the thin-shell $A_{\rm unit}$. With $A_{\rm eff}/A_{\rm unit} \simeq 0.015$, the corrected physical response at $m_{\rm best}$ is
+
+```math
+A_\tau^{\rm physical,\,corrected} \simeq 0.015 \times (0.16\text{–}0.45) \simeq 0.002\text{–}0.007,
+```
+
+reducing the patchy contribution at $m_{\rm best}$ from 1–10% of the anisotropic CB limit to roughly **0.02–0.1%**. The `21`/`22` results remain valid as thin-shell upper bounds, but they should not be quoted as the realistic amplitude at $m_{\rm best}$.
+
+At $m_{\rm res}$, the suppression factor is only ~0.73, so the budget there is closer to the thin-shell estimate. The natural next step is to redo the `21`/`22`-style natural-unit budget **at $m_{\rm res}$** using $A_{\rm eff}$ rather than $A_{\rm unit}$.

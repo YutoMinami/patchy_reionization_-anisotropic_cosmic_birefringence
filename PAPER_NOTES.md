@@ -274,3 +274,42 @@ The remaining uncertainty is not the numerical stability of the background solve
 4. anisotropic-CB reinterpretation は raw quantity ではなく natural-unit quantity でやり直す
 5. Dvorkin-Smith 系 template の normalisation をもっと物理的に寄せる
 6. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ のベンチマークを追加する
+
+## `24` を踏まえた更新
+
+visibility-weighted response を直接計算した `24` によって、mass priority はさらに明確になった。
+
+- preferred mass
+  ```math
+  m_{\rm best} = 5.878016\times10^{-27}\ {\rm eV}
+  ```
+  では
+  ```math
+  A_{\rm eff}/A_{\rm unit} \simeq 0.0148
+  ```
+  であり、thin-shell estimate は大幅に suppress される
+- resonance-scale mass
+  ```math
+  m_{\rm res} = 1.023963\times10^{-29}\ {\rm eV}
+  ```
+  では
+  ```math
+  A_{\rm eff}/A_{\rm unit} \simeq 0.734
+  ```
+  であり、finite-width visibility averaging を入れても応答のかなりの部分が残る
+
+この意味で、次の main message 候補は
+
+- 「old thin-shell $m_{\rm best}$ point で patchy が効く」
+
+ではなく、
+
+- 「finite-width reionization を入れると、physically interesting window は $m_{\rm res}\sim10^{-29}$ eV 近傍へ移る」
+
+である。
+
+したがって次の main figure 候補は、old `$m_{\rm best}$ + thin-shell` budget ではなく、
+
+- `$A_{\rm eff}$ を使った natural-unit budget near $m_{\rm res}$`
+
+に置き換えるのが自然である。
