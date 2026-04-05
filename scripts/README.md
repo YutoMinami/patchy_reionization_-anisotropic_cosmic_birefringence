@@ -154,6 +154,14 @@ This split workflow is intended to avoid losing everything when the heavy `A_uni
 - On WSL2, prefer running `11` in mass chunks or exact-mass jobs using `--mass-min`, `--mass-max`, or `--masses`.
 - Core numerical logic should live in `../patchy_reionization.py`, not be reimplemented separately in each script.
 
+- `23-check_osc_scale.py`
+  Caveat 2 verification Step 1: compute the ALP oscillation comoving wavelength
+  `lambda_osc(m_a)` at `z_rei` and compare with the bubble scale `R_eff` and the
+  visibility-function width `Delta_chi_vis`. Outputs `N_osc` (number of oscillations
+  in the visibility window) to diagnose whether the thin-shell approximation is accurate.
+- `23b-visualize_osc_scale.ipynb`
+  Notebook for visualizing the `lambda_osc` vs scale comparison from `23`.
+
 ## Later scripts
 
 - `15-a_reff_surrogate_bound.py`

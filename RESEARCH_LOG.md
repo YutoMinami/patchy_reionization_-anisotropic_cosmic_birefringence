@@ -149,6 +149,19 @@ toy な `C_L^{\tau\tau}` と `C_L^{\phi\phi}` を使うと、`L ~ 300` 近傍で
 これは feasibility の観点では重要です。
 ただし、まだ物理正規化前なので、この時点では「そういう可能性が toy setup ではある」としか言えません。
 
+### toy conclusion と current physical conclusion は分けて読むべき
+
+ここまでの研究で一番大事な整理は、toy-level の結論と、現在の physical-level の結論を混同しないことです。
+
+- toy-level:
+  unit-response と toy $C_L^{\tau\tau}$ を使うと、bubble scale 付近で patchy dominance は十分に起こりうる
+- current physical-level:
+  natural-unit 化と Chandra benchmark coupling を入れると、patchy contribution は現在の surrogate では percent-to-ten-percent level に落ち着く
+
+したがって、「patchy が dominant になりうる」は feasibility の話であり、いまの paper-level な physical statement は
+「patchy は subdominant だが non-negligible であり、既存 constraint の再解釈で無視すべきではない」
+という形になる。
+
 ### `\tau` fluctuation 自体のモデルはまだ入れていない
 
 ここで注意すべきなのは、現段階では `\tau` fluctuation そのものに対して具体的な patchy reionization model をまだ入れていないことです。
@@ -1012,3 +1025,76 @@ matched mass $m_a = 5.878016 \times 10^{-27}\,{\rm eV}$ では、
 - そのうえで realistic な $C_L^{\tau\tau}$ template をどう入れるか
 
 である。
+
+---
+
+## thin-shell 近似の妥当性検証: `23-check_osc_scale` (2026-04-05)
+
+### 動機
+
+`21/22` で physical な $A_\tau$ の大きさは確定した。次の問いは thin-shell 近似
+
+```math
+\delta\alpha_\tau \simeq -\frac{g_{a\gamma}}{2}\,\dot\phi(\bar\eta_{\rm rei})\,\frac{d\eta}{d\tau}\,\delta\tau(\hat n)
+```
+
+がどの程度信頼できるか、あるいは full visibility-weighted 積分と大きくずれるかどうかである。
+
+当初の仮説は「ALP 振動波長 $\lambda_{\rm osc}$ と bubble scale $R_{\rm bubble}$ がマッチすれば line-of-sight 積分で共鳴増幅が起きるのではないか」というものだった。
+
+### `23` でやったこと
+
+- $\lambda_{\rm osc}(m_a)$ を $z_{\rm rei}$ で計算: $\lambda_{\rm osc} = 2\pi\hbar c / (m_a c^2 a_{\rm rei})$
+- 可視関数 $g(\eta)$ の comoving 幅 $\Delta\chi_{\rm vis}$ を tanh 型 ionization history から計算
+- patchy reionization の持続期間 $\Delta z \sim 3$ に対応する $\Delta\chi_{\rm patchy}$ を計算
+- $N_{\rm osc} = \Delta\chi_{\rm patchy}/\lambda_{\rm osc}$ を質量全域でプロット
+
+### 数値結果
+
+preferred mass $m_a = 5.878 \times 10^{-27}$ eV において:
+
+| 量 | 値 |
+|---|---|
+| $\lambda_{\rm osc}$ | **0.060 Mpc = 59.5 kpc** |
+| $R_{\rm eff}$ (fiducial) | 34 Mpc |
+| $\lambda_{\rm osc}/R_{\rm eff}$ | $\sim 1/570$ |
+| $\Delta\chi_{\rm patchy}$ ($\Delta z = 3$) | 924 Mpc |
+| $N_{\rm osc}$ (patchy epoch) | **~15,000** |
+
+### 解釈
+
+**$m_{\rm best}$ において**は $\lambda_{\rm osc} = 0.060$ Mpc $\ll R_{\rm eff} = 34$ Mpc であり、bubble スケールとの空間的マッチングは存在しない。
+
+一方、空間的共鳴が起きる質量（$\lambda_{\rm osc} = R_{\rm eff}$ となる質量）は
+
+$$m_{\rm res} \simeq 7\times10^{-30}\text{–}7\times10^{-29}\ {\rm eV}$$
+
+であり、$m_{\rm best}$ よりも約 2–3 桁小さい。この質量帯が物理的に interesting かどうかは別途調べる必要があり、**共鳴増幅の可能性は $m_{\rm best}$ では否定されるが、一般論としてはまだ棄却されていない。**
+
+$m_{\rm best}$ においては、問題は空間的でなく**時間的**である。
+$N_{\rm osc} \sim 15{,}000$ 周期が patchy reionization epoch の中に収まっており、thin-shell 近似はその中の特定の位相1点を評価しているだけである。full visibility-weighted 積分は多数の位相にわたって平均化されるため、thin-shell の $A_{\rm unit}$ と大幅に異なる（おそらく小さくなる）可能性が高い。
+
+### $A_{\rm unit}$ スキャンから分かること（04a）
+
+`results/04a-a-unit/A_unit_scan.csv` を確認すると、$m_a \gtrsim 10^{-32}$ eV の範囲では $|A_{\rm unit}|$ は概ね $10^9$–$10^{10}$ （code units）でほぼ一定であり（符号は位相によって振動する）、$m_{\rm best} = 5.9\times10^{-27}$ eV は特別に大きいわけではない。
+
+重要な点は：
+
+- $m_{\rm res} \sim 7\times10^{-30}$–$7\times10^{-29}$ eV における $|A_{\rm unit}|$ は $3\times10^9$–$6\times10^9$ であり、$m_{\rm best}$ の $1.4\times10^{10}$ と同程度
+- したがって $m_{\rm best}$ にこだわる必要はなく、**空間共鳴が起きる $m_{\rm res}$ 付近は振幅的に equally viable**
+
+### $C_L^{\tau\tau}$ の toy model が小さすぎた問題
+
+これまでの toy $C_L^{\tau\tau}$（log-normal bump surrogate）は、物理的な bubble clustering の振幅に比べて小さすぎた可能性がある。空間共鳴（$\lambda_{\rm osc} \sim R_{\rm eff}$）が起きていれば、line-of-sight 積分の中で $\dot\phi(\chi)$ の振動と bubble の空間分布が coherent に重なり、$C_L^{\tau\tau}$ の有効振幅が toy 推定より大幅に増幅される。
+
+この増幅は $m_{\rm res}$ 付近でのみ起き、$m_{\rm best}$ では起きない（$\lambda_{\rm osc} \ll R_{\rm eff}$）。**よって $m_{\rm res}$ が本命の質量域である可能性がある。**
+
+### 次のステップ
+
+1. $m_{\rm res} \sim 10^{-29}$ eV を中心に、full line-of-sight 積分
+
+   $$C_L^{\alpha_\tau\alpha_\tau} \propto \int \frac{d\chi}{\chi^2}\, \left[g(\chi)\,\dot\phi_{\rm conf}(\chi)\,\frac{d\eta}{d\tau}\right]^2 P_{\delta\tau}\!\left(\frac{L}{\chi}\right)$$
+
+   を計算し、toy surrogate との比較で空間共鳴増幅の大きさを定量化する。
+
+2. Script 24 では、まず時間的な問題（$A_{\rm eff}/A_{\rm unit}$ の位相平均化効果）を $m_{\rm best}$ と $m_{\rm res}$ の両方で確認する。$m_{\rm res}$ では位相が揃っている可能性があり、$A_{\rm eff}$ が thin-shell より大きくなることも考えられる。

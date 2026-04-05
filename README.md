@@ -30,7 +30,7 @@ A_\phi^2 C_L^{\phi\phi}
 
 と同程度以上になりうるかどうかです。
 
-実際の研究上の問いは、「ALP 背景場を物理的に正規化した後でも patchy 項が優勢になりうるか」です。
+実際の研究上の問いは、「ALP 背景場を物理的に正規化し、さらに現実的な coupling を入れた後に、patchy 項が観測的に無視できないレベルまで達するか」です。
 
 ## $\alpha_\phi$ と $\alpha_\tau$ の分解
 
@@ -89,9 +89,11 @@ A_\tau^2 C_L^{\tau\tau}
 ## 現在の理解
 
 - 定式化自体は `HANDOFF.md` に整理されています。
-- toy spectrum を使った初期検証では、bubble scale に対応する $L \sim 300$ 付近で patchy 項が優勢になりうることが示唆されています。
-- ただし、これまでに出ていた非常に大きな $R_\tau$ は ALP 振幅の物理正規化前の値であり、そのまま物理的主張には使えません。
-- 元の feasibility notebook では、$phi_ini$ を小さくすると応答係数 $A$ が線形に縮まず、場合によっては符号まで反転する問題がありました。
+- toy spectrum を使った初期検証では、bubble scale に対応する $L \sim 300$ 付近で patchy 項が優勢になりうることが示唆されました。
+- ただし、これは unit-response と toy $C_L^{\tau\tau}$ を使った feasibility の話であり、そのまま physical な結論ではありません。
+- natural-unit への変換と Chandra benchmark の coupling を入れた現在の評価では、patchy contribution は anisotropic CB limit に対しておおよそ 1–10% レベルです。
+- したがって、現時点の主張は「patchy が必ず支配的」というより、「subdominant だが無視できない contribution になりうる」です。
+- 元の feasibility notebook では、$\phi_{\rm ini}$ を小さくすると応答係数 $A$ が線形に縮まず、場合によっては符号まで反転する問題がありました。
 - この問題は現在、物理ではなく数値設定に由来するものだと分かっています。
 
 ## 安定な計算方針
@@ -106,7 +108,7 @@ A(m_a) = \dot{\phi}_{\rm conf}(\eta_{\rm rei}) \frac{d\eta}{d\tau}
 
 背景 ODE は $\phi$ に対して線形なので、推奨するワークフローは次の通りです。
 
-1. $phi_ini = 1$ で一度だけ解く
+1. $\phi_{\rm ini} = 1$ で一度だけ解く
 2. その解から $A_unit(m_a)$ を定義する
 3. 任意の振幅については後から線形に rescale する
 
@@ -206,14 +208,29 @@ dense output と unit-response rescaling を使う現在の方法では、線形
 
 この意味で、現状の主張は `\tau` の詳細モデルよりも、`C_L^{\tau\tau}` に対する必要条件や感度評価に近いものです。
 
+## 現在の物理的な到達点
+
+- `21` では matched background solution を natural units に写し、$A_\tau$ の大きさを再解釈しました。
+- matched mass $m_a = 5.878016 \times 10^{-27}\,{\rm eV}$ では、
+  - $A_\tau \simeq 0.157$ for $g = 1.4 \times 10^{-12}\,{\rm GeV}^{-1}$
+  - $A_\tau \simeq 0.448$ for $g = 4.0 \times 10^{-12}\,{\rm GeV}^{-1}$
+  となっています。
+- `22` では、この natural-unit な $A_\tau$ を使って $D_L^{\alpha\alpha}$ budget を描き直しました。
+- その結果、patchy contribution の最大は anisotropic-CB limit の
+  - 約 1.2% for $g = 1.4 \times 10^{-12}\,{\rm GeV}^{-1}$
+  - 約 10% for $g = 4.0 \times 10^{-12}\,{\rm GeV}^{-1}$
+  に収まります。
+- `23` では thin-shell 近似の妥当性を点検し、preferred mass では spatial resonance ではなく temporal phase averaging が主要な caveat だと分かりました。一方で、spatial resonance の候補質量 $m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 付近は今後の本命検証領域です。
+
 ## 次の科学的ステップ
 
-1. `R_tau,max^unit(m_a)` を質量全域で評価する
-2. `R_tau,max = 1` などを達成するために必要な `phi_needed(m_a)` を求める
-3. ALP energy-density bound から許容される `phi_amp_max(m_a)` を見積もる
-4. `phi_needed(m_a)` と `phi_amp_max(m_a)` を比較する
-5. その後で必要なら cross spectrum の扱いを深める
+1. natural-unit pipeline を正本として、anisotropic-CB reinterpretation を raw quantity ではなく physical quantity でやり直す
+2. $m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 付近を中心に、spatial resonance の可能性を優先的に検証する
+3. `24` 以降で full visibility-weighted $A_{\rm eff}$ を評価し、temporal phase averaging の suppress / enhance を確認する
+4. Dvorkin-Smith 系の $C_L^{\tau\tau}$ template の正規化を、より文献寄りにする
+5. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ の benchmark を追加する
+6. その後で必要なら cross spectrum の扱いを深める
 
 ## 重要な注意
 
-toy model で得られる大きな `R_tau` は、feasibility を考える手がかりとしては有用ですが、それ自体が最終的な物理結果ではありません。最終的な中心結果は、「patchy 優勢に必要な振幅」と「物理的に許される振幅」の比較になる想定です。
+toy model で得られる大きな $R_\tau$ は、feasibility を考える手がかりとしては有用ですが、それ自体が最終的な物理結果ではありません。現在の中心結果は、natural-unit と現実的 coupling を入れると patchy contribution は percent-to-ten-percent level に落ち着く、という点です。

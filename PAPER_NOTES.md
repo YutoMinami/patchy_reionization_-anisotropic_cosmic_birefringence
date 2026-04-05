@@ -4,9 +4,9 @@
 
 このプロジェクトの現時点での主張候補は、次の3本です。
 
-1. patchy reionization による effective birefringence term は、toy spectrum では genuine ALP term を十分に上回りうる
-2. required amplitude $\phi_{\rm needed}(m_a)$ は、現在の phenomenological $\phi_{\rm amp,max}(m_a)$ と比べて非常に小さい
-3. この「非常に小さい ratio」は、mixed solver setup の artifact ではなく、matched rerun (`11/12`) でも維持される
+1. patchy reionization による effective birefringence term は、toy spectrum では genuine ALP term を上回りうるが、physical normalization を入れると現状では percent-to-ten-percent level の寄与として現れる
+2. required amplitude $\phi_{\rm needed}(m_a)$ は、matched rerun (`11/12`) でも phenomenological $\phi_{\rm amp,max}(m_a)$ より十分小さい
+3. 既存の anisotropic CB constraint は genuine term 単独ではなく total birefringence power への制限として読むべきであり、patchy contribution は subdominant でも無視できない
 
 ## 何が robust で、何がまだ toy か
 
@@ -16,6 +16,7 @@
 - $\phi_{\rm ini}$ 小振幅での異常が数値 artifact だったこと
 - unit-response rescaling を使うべきこと
 - matched rerun でも $\phi_{\rm needed} / \phi_{\rm amp,max} \ll 1$ が維持されること
+- natural-unit へ直した `21/22` で、huge な $C_L^{\alpha\alpha}$ が主に unit-system mismatch に由来していたと分かったこと
 
 ### まだ toy / phenomenological な点
 
@@ -181,13 +182,11 @@ Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-S
 
 1. 異方的 CB を $\alpha_\phi + \alpha_\tau$ に分解する
 2. patchy term は effective emission-time shift として現れる
-3. toy spectra で $R_\tau(L)$ を見ると、bubble-scale multipole 付近で patchy dominance がありうる
-4. 既存 anisotropic CB constraint は total birefringence power にかかることを整理する
-5. required amplitude $\phi_{\rm needed}(m_a)$ を作る
-6. phenomenological amplitude bound $\phi_{\rm amp,max}(m_a)$ を作る
-7. matched rerun で solver-mixing の疑いを潰す
-8. その上でも $\phi_{\rm needed} / \phi_{\rm amp,max}$ は十分小さい
-9. よって patchy contribution は current proxy では strongly viable
+3. toy spectra で $R_\tau(L)$ を見ると、bubble-scale multipole 付近で patchy dominance がありうることを示す
+4. その後、required amplitude $\phi_{\rm needed}(m_a)$ と phenomenological amplitude bound $\phi_{\rm amp,max}(m_a)$ を matched rerun で比較する
+5. natural-unit への再解釈で unit-system mismatch を取り除く
+6. 既存 anisotropic CB constraint は total birefringence power にかかることを整理する
+7. Chandra benchmark coupling では patchy contribution は percent-to-ten-percent level で、subdominant だが無視できないと結論する
 
 ## figure 候補
 
@@ -209,20 +208,20 @@ Roy などの後続研究も、少なくとも現段階の理解では Dvorkin-S
 強く言ってよいこと:
 
 - current toy + phenomenological framework では no-go ではない
-- むしろ amplitude budget の観点ではかなり余裕がある
+- amplitude budget の観点では no-go ではなく、natural-unit でも現実的 coupling で patchy contribution は残る
 - solver mismatch を直しても結論は変わらない
 
 慎重に言うべきこと:
 
 - realistic $C_L^{\tau\tau}$ をまだ使っていない
 - $\phi_{\rm amp,max}$ はまだ phenomenological proxy
-- したがって final physical prediction ではなく “encouraging viability result” の段階
+- したがって final physical prediction ではなく “subdominant but non-negligible benchmark result” の段階
 
 ## 次に書くべき短い文章
 
 ### abstract 的な一文
 
-We show that a patchy-reionization-induced effective birefringence term can dominate over the genuine ALP fluctuation contribution in toy spectra near the reionization bubble scale, and that the ALP amplitude required for such dominance remains far below a phenomenological energy-density bound even after a matched high-precision rerun.
+We show that a patchy-reionization-induced effective birefringence term can provide a subdominant but non-negligible contribution to anisotropic cosmic birefringence, and that existing constraints should be interpreted as limits on the total birefringence power rather than on the genuine ALP fluctuation term alone.
 
 ### introduction 的な一文
 
@@ -270,6 +269,8 @@ The remaining uncertainty is not the numerical stability of the background solve
 ## 次の実務の更新
 
 1. `22` を現在の正本 budget plot として採用する
-2. anisotropic-CB reinterpretation は raw quantity ではなく natural-unit quantity でやり直す
-3. Dvorkin-Smith 系 template の normalisation をもっと物理的に寄せる
-4. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ のベンチマークを追加する
+2. `23` を踏まえて、preferred mass では temporal averaging が主要 caveat であり、spatial resonance の本命は $m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 付近だと明記する
+3. 次の検証は $m_{\rm res}$ 近傍を中心に進める
+4. anisotropic-CB reinterpretation は raw quantity ではなく natural-unit quantity でやり直す
+5. Dvorkin-Smith 系 template の normalisation をもっと物理的に寄せる
+6. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ のベンチマークを追加する
