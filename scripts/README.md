@@ -196,6 +196,34 @@ This split workflow is intended to avoid losing everything when the heavy `A_uni
   `21` の natural-unit `A_\tau` を使って `D_L^{\alpha\alpha}` budget を描き直す。
 - `22b-visualize_natural_unit_budget.ipynb`
   `22` の自然単位 budget 図を確認する notebook。
+- `24-check_visibility_averaged_aeff.py`
+  finite-width visibility function を入れた `A_{\rm eff}` を計算し、thin-shell `A_{\rm unit}` と比較する。CSV は resume 対応。
+- `24b-visualize_visibility_averaged_aeff.ipynb`
+  `24` の `A_{\rm eff}/A_{\rm unit}` と `m_{\rm res}` / `m_{\rm best}` 比較を可視化する notebook。
+- `25-scan_visibility_aeff_mres.py`
+  `m_{\rm res}` 近傍を finer scan して visibility-weighted `A_{\rm eff}` を計算する。CSV は resume 対応。
+- `25b-visualize_visibility_aeff_mres.ipynb`
+  `25` の oscillatory structure を可視化する notebook。
+- `26-natural_unit_aeff_mres.py`
+  `25` の output を natural units に写し、visibility-weighted physical `A_{\tau,{\rm eff}}` を出す。
+- `26b-visualize_natural_unit_aeff_mres.ipynb`
+  `26` の physical `A_{\tau,{\rm eff}}` を可視化する notebook。
+- `27-natural_unit_budget_mres.py`
+  `26` の visibility-weighted `A_{\tau,{\rm eff}}` を使って `m_{\rm res}` 近傍の natural-unit budget を計算する。
+- `27b-visualize_natural_unit_budget_mres.ipynb`
+  `27` の budget 図を可視化する notebook。
+- `28-required_template_boost.py`
+  `27` の best point を 1%, 10%, 100% of limit に押し上げるために必要な template-normalization boost を逆算する。
+- `29-amplitude_scaling_sensitivity.py`
+  `D_{\rm peak} \propto (A/A_{\rm fid})^{p_{\rm amp}} (b/b_{\rm fid})^{p_b}` の sensitivity を調べ、current parameter range で得られる最大 boost を見積もる。
+- `28b-visualize_required_template_boost.ipynb`
+  `28` の required boost を表とログプロットで確認する notebook。
+- `29b-visualize_amplitude_scaling_sensitivity.ipynb`
+  `29` の scaling sensitivity を heatmap と threshold comparison で確認する notebook。
+- `30-bestcase_scaled_budget.py`
+  `27b` の best budget と `29` の最大 boost を組み合わせ、current parameter range での best-case observable fraction を見積もる。
+- `30b-visualize_bestcase_scaled_budget.ipynb`
+  `30` の best-case fraction を scaling scenario ごとに可視化する notebook。
 
 ## Current takeaway after `21/22`
 
@@ -203,3 +231,11 @@ This split workflow is intended to avoid losing everything when the heavy `A_uni
 - `21` の自然単位化では、matched mass `m_a = 5.878016e-27 eV` で `A_\tau \simeq 0.157` for `g=1.4e-12 GeV^{-1}`、`A_\tau \simeq 0.448` for `g=4.0e-12 GeV^{-1}` になった。
 - `22` では patchy contribution の最大値が anisotropic-CB limit に対して、`g=1.4e-12` で約 `1.2%`、`g=4.0e-12` でも約 `10%` に収まり、前の absurdly large な budget は unit-system mismatch が主因だったことが強く示唆される。
 
+## Current takeaway after `24`–`29`
+
+- `24` により、old thin-shell mass `m_{\rm best}` では `A_{\rm eff}/A_{\rm unit} \simeq 0.015` と強く suppress される一方、`m_{\rm res}\sim10^{-29}` eV 近傍が physically relevant window だと分かった。
+- `25/26/27` の fine scan では、best point は `m/m_{\rm res}=0.895025` に動くが、current surrogate normalization と benchmark couplings の下で observable-level budget は still `10^{-3}` 級に留まる。
+- `28` は 1%, 10%, 100% of limit に届くための required boost を逆算する step。
+- `29` は scaling sensitivity の点検で、current parameter range では最大 boost が `3.27e1` 程度までしか出ないことを確認する step。
+- `30` はその最大 boost を budget 側へ戻し、current range 内の best-case observable fraction が low-`g` で `7.0e-3`、high-`g` で `5.7e-2` 程度だと見積もる step。
+- したがって、次の本命は mass scan ではなく Dvorkin-Smith 系 normalization をより physical にすること。

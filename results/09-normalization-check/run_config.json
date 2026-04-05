@@ -1,8 +1,0 @@
-{
-  "a_unit_csv": "results/04a-a-unit/A_unit_scan.csv",
-  "phi_max_csv": "results/07a-phi-amp-max-split/phi_amp_max_scan.csv",
-  "a_eval": 0.11494252873563221,
-  "H_eval": 3.1550669128128826e-17,
-  "deta_dtau_eval": 1.0453772493565732e+27,
-  "max_relative_A_unit_error": 1.5842806518370947
-}

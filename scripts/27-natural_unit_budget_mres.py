@@ -176,7 +176,7 @@ def main() -> None:
     write_csv(args.output_dir / "natural_unit_budget_mres_scan.csv", list(scan_rows[0].keys()), scan_rows)
     write_csv(args.output_dir / "natural_unit_budget_mres_summary.csv", list(summary_rows[0].keys()), summary_rows)
 
-    best_eff = max(summary_rows, key=lambda r: float(r["max_frac_eff"]))
+    g_values_seen = sorted({float(r["g_GeV_inv"]) for r in summary_rows})
     lines = [
         "# 27-natural_unit_budget_mres summary",
         "",
@@ -187,14 +187,18 @@ def main() -> None:
         f"- `L_peak = {l_peak:.3f}`",
         f"- genuine benchmark = `{args.genuine_limit_fraction:.2f}` times anisotropic-CB limit",
         "",
-        "Most constraining visibility-weighted point in this scan:",
-        f"- `g = {float(best_eff['g_GeV_inv']):.2e} GeV^-1`",
-        f"- `m/m_res = {float(best_eff['mass_over_mres']):.6f}`",
-        f"- `m = {float(best_eff['mass_eV']):.6e} eV`",
-        f"- `Aeff/Aunit = {float(best_eff['Aeff_over_Aunit']):.6e}`",
-        f"- `A_tau_eff_physical = {float(best_eff['A_tau_eff_physical']):.6e}`",
-        f"- `max D_tau_eff / D_limit = {float(best_eff['max_frac_eff']):.6e}` at `L = {int(best_eff['L_peak_frac_eff'])}`",
+        "Most constraining visibility-weighted point per g value:",
     ]
+    for g in g_values_seen:
+        subset = [r for r in summary_rows if abs(float(r["g_GeV_inv"]) - g) < 1e-30]
+        best = max(subset, key=lambda r: float(r["max_frac_eff"]))
+        lines += [
+            f"- `g = {g:.2e} GeV^-1`:",
+            f"  - `m/m_res = {float(best['mass_over_mres']):.6f}`, `m = {float(best['mass_eV']):.6e} eV`",
+            f"  - `Aeff/Aunit = {float(best['Aeff_over_Aunit']):.6e}`",
+            f"  - `A_tau_eff_physical = {float(best['A_tau_eff_physical']):.6e}`",
+            f"  - `max D_tau_eff / D_limit = {float(best['max_frac_eff']):.6e}` at `L = {int(best['L_peak_frac_eff'])}`",
+        ]
     (args.output_dir / "summary.md").write_text("\n".join(lines) + "\n")
     (args.output_dir / "run_config.json").write_text(
         json.dumps({k: (str(v) if isinstance(v, Path) else v) for k, v in vars(args).items()}, indent=2)

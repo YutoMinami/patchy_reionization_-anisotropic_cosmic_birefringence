@@ -522,19 +522,19 @@ What is already in hand:
 - natural-unit conversion of the matched background quantities (`21`)
 - a $D_L^{\alpha\alpha}$ budget in natural units with explicit $g_{a\gamma}$ (`22`)
 
-Current best physical result (from `21`/`22`):
+Historical thin-shell result (from `21`/`22`):
 
 - at matched mass $m_{\rm best} = 5.878016 \times 10^{-27}\ {\rm eV}$,
   $A_\tau^{\rm physical} \simeq 0.16$ for $g = 1.4 \times 10^{-12}\ {\rm GeV}^{-1}$,
   $A_\tau^{\rm physical} \simeq 0.45$ for $g = 4.0 \times 10^{-12}\ {\rm GeV}^{-1}$
-- the patchy $D_L^{\alpha\alpha}$ contribution is at the **1–10% level** of the anisotropic CB observational limit for these benchmark couplings
+- the patchy $D_L^{\alpha\alpha}$ contribution was at the **1–10% level** of the anisotropic CB observational limit for these benchmark couplings
 
-The earlier code-unit ratio $\phi_{\rm needed}/\phi_{\rm amp,max} \sim 10^{-15}$–$10^{-11}$ from `11`/`12` confirmed amplitude feasibility but is **not a physical observable**; `21`/`22` are the correct reference for paper-level claims.
+The earlier code-unit ratio $\phi_{\rm needed}/\phi_{\rm amp,max} \sim 10^{-15}$–$10^{-11}$ from `11`/`12` confirmed amplitude feasibility but is **not a physical observable**. Likewise, `21`/`22` are now best read as thin-shell upper bounds, not as the final physical claim.
 
 The next job is:
 
-- use `22` as the canonical budget figure,
-- reformulate the paper claim around percent-to-ten-percent non-negligibility rather than dominance,
+- treat `21`/`22` as historical thin-shell reference plots,
+- use `24/25/26/27` as the current physical reading,
 - quantify the $C_L^{\tau\tau}$ template uncertainty and the emit-time-shift approximation error,
 - and prioritize follow-up tests near $m_{\rm res} \sim 10^{-29}$ eV, where spatial resonance remains possible.
 
@@ -570,20 +570,36 @@ reducing the patchy contribution at $m_{\rm best}$ from 1–10% of the anisotrop
 
 At $m_{\rm res}$, the suppression factor is only ~0.73, so the budget there is closer to the thin-shell estimate. The natural next step is to redo the `21`/`22`-style natural-unit budget **at $m_{\rm res}$** using $A_{\rm eff}$ rather than $A_{\rm unit}$.
 
-Update after `25/26/27`:
+Update after `25`/`26`/`27` (31-point scan):
 
-- the finer scan around `$m_{\rm res}$` shows a genuinely oscillatory structure in `$A_{\rm eff}/A_{\rm unit}$`
-- the largest visibility-weighted physical coefficient in the current scan occurs at
+- `25-scan_visibility_aeff_mres.py` performed a fine scan near $m_{\rm res}$ (0.5–2.0 × $m_{\rm res}$, 31 points log-spaced) and computed visibility-weighted $A_{\rm eff}$ at each mass.
+- `26-natural_unit_aeff_mres.py` converted the `25` output to natural units, yielding $A_\tau^{\rm eff,\,physical}$ per g benchmark.
+- `27-natural_unit_budget_mres.py` evaluated the $D_L^{\alpha\alpha}$ budget using these corrected coefficients.
+
+Current best result from `27` (per g value):
+
+- $g = 1.4\times10^{-12}\ {\rm GeV}^{-1}$: max $D_\tau^{\rm eff} / D_{\rm limit} \simeq 1.56\times10^{-4}$ (0.016%) at $L=289$, $m/m_{\rm res} = 0.574$
+- $g = 4.0\times10^{-12}\ {\rm GeV}^{-1}$: max $D_\tau^{\rm eff} / D_{\rm limit} \simeq 1.27\times10^{-3}$ (0.13%) at $L=289$, $m/m_{\rm res} = 0.574$
+
+**Important caveat on `25`–`27` results**: The `25` scan used only 31 grid points. The ratio $A_{\rm eff}/A_{\rm unit}$ oscillates rapidly and erratically across the mass range (values ranging from $-0.34$ to $+0.73$), meaning the true peak may not be captured. The current best mass ($m/m_{\rm res}=0.574$) may be a grid artifact.
+
+---
+
+Update after fine 201-point rerun (`25b/26b/27b`):
+
+- the finer scan confirms that the structure near `$m_{\rm res}$` is genuinely oscillatory
+- the coarse-scan best point at `$m/m_{\rm res}=0.574$` was not stable
+- the largest visibility-weighted physical coefficient in the finer scan occurs at
   ```math
-  m/m_{\rm res} = 0.574349
+  m/m_{\rm res} = 0.895025
   ```
   rather than exactly at `$m/m_{\rm res}=1$`
 - for the Chandra benchmark couplings, this gives
   ```math
   |A_{\tau,{\rm eff}}^{\rm physical}|_{\max}
-  \simeq 2.32\times10^{-2}
+  \simeq 2.72\times10^{-2}
   \quad {\rm or} \quad
-  6.62\times10^{-2}
+  7.78\times10^{-2}
   ```
   for `$g=1.4\times10^{-12}$` and `$4.0\times10^{-12}\ {\rm GeV}^{-1}$`
 
@@ -591,7 +607,7 @@ Most importantly, the budget re-evaluation in `27` gives only
 
 ```math
 \max\left(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}}\right)
-\simeq 1.27\times10^{-3}
+\simeq 1.75\times10^{-3}
 ```
 
 at the best point of the current scan.
@@ -602,7 +618,47 @@ So the current best reading is:
 - `$m_{\rm res}$` is still the right place to look for any surviving structure
 - but with the current surrogate `$C_L^{\tau\tau}$` normalization and benchmark couplings, the observable-level patchy signal is only at the `$10^{-3}$` level of the current anisotropic-CB limit
 
-This makes the next scientific question more specific:
+## Immediate next task for Codex
+
+The finer scan is now done. The next scientific question is:
 
 - is the remaining suppression mainly due to the surrogate template normalization,
 - or is the realistic paper claim actually about the formal decomposition and finite-width suppression itself rather than an observable-level large signal?
+
+---
+
+Update after `28/29` normalization sensitivity checks:
+
+- `28-required_template_boost.py` asked how much the current surrogate template normalization would need to be boosted for the best `27b` point to reach selected fractions of the anisotropic-CB limit.
+- Required boost factors are large:
+  - for `g = 1.4e-12 GeV^-1`, about `4.66e1` for 1%, `4.66e2` for 10%, `4.66e3` for 100%
+  - for `g = 4.0e-12 GeV^-1`, about `5.70` for 1%, `5.70e1` for 10%, `5.70e2` for 100%
+- `29-amplitude_scaling_sensitivity.py` then tested steeper Dvorkin-Smith-inspired scalings
+  ```math
+  D_{\rm peak} \propto (A/A_{\rm fid})^{p_{\rm amp}} (b/b_{\rm fid})^{p_b}
+  ```
+  with `p_amp, p_b <= 3`.
+- Within the currently scanned `(tau, Delta y, b)` range, the largest available boost is only about
+  ```math
+  {\rm max\ boost} \simeq 3.27\times10^1
+  ```
+  at `tau=0.11`, `Delta y=19.0`, `b=2`.
+
+So the current best reading is:
+
+- normalization uncertainty is now the dominant open issue
+- but even fairly aggressive surrogate rescaling does not automatically restore a large observable signal
+- the most plausible near-term branch is:
+  1. make the Dvorkin-Smith normalization more physical,
+  2. rerun the `27`-style budget,
+  3. if it still stays small, lock the paper framing onto finite-width suppression and constraint reinterpretation rather than signal detectability
+
+`30-bestcase_scaled_budget.py` goes one step further and combines the `27b` current best budget
+with the largest available `29` boost inside the current `(tau, Delta y, b)` range.
+
+- `g = 1.4e-12 GeV^-1` -> best-case scaled fraction `7.02e-03`
+- `g = 4.0e-12 GeV^-1` -> best-case scaled fraction `5.73e-02`
+
+So, even under a deliberately optimistic reading of the current surrogate family,
+the signal remains below the current anisotropic-CB limit and reaches at most the few-percent level
+for the higher benchmark coupling.

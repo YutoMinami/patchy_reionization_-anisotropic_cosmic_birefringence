@@ -1292,3 +1292,155 @@ m/m_{\rm res} = 0.574349
 1. `27b` を見ながら、この $10^{-3}$ 級という結論が surrogate template の normalization にどれだけ依存しているかを整理する
 2. Dvorkin-Smith 系 template の normalization をより物理的に寄せて再評価する
 3. それでも小さいなら、paper claim は “observable-level importance” より “formal decomposition, finite-width suppression, and reinterpretation caveat” に寄せる
+
+### finer 201-point rerun
+
+その後 `25` を 201 点で rerun し、`26b/27b` まで更新した。
+
+この finer scan では、31 点版での best point
+
+```math
+m/m_{\rm res} = 0.574349
+```
+
+は安定ではなく、current best point は
+
+```math
+m/m_{\rm res} = 0.895025
+```
+
+に移った。
+
+対応する数値は
+
+- `g = 1.4\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  A_{\tau,{\rm eff}}^{\rm physical} = -2.721620\times10^{-2}
+  ```
+  かつ
+  ```math
+  \max(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}})
+  = 2.148092\times10^{-4}
+  ```
+- `g = 4.0\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  A_{\tau,{\rm eff}}^{\rm physical} = -7.776057\times10^{-2}
+  ```
+  かつ
+  ```math
+  \max(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}})
+  = 1.753545\times10^{-3}
+  ```
+
+だった。
+
+したがって、finer scan を入れても大筋は変わらない。
+
+- `$m_{\rm res}$` 近傍には確かに oscillatory structure がある
+- best point は coarse scan の artifact で動きうる
+- しかし、current surrogate template と benchmark coupling の下では、observable-level patchy signal は依然として `$10^{-3}$` 級に留まる
+
+### `28`: required template boost
+
+次に、この `$10^{-3}$` 級という結論が単なる template normalization の取り方に起因していないかを、
+逆向きに見積もった。
+
+`28-required_template_boost.py` では、`27b` の best point を基準に、
+template normalization を何倍すれば
+
+```math
+D_L^{\alpha\alpha,\tau,{\rm eff}} / D_L^{\alpha\alpha,{\rm lim}}
+```
+
+が `10^{-2}`, `10^{-1}`, `1` に届くかを計算した。
+
+結果は以下の通りである。
+
+- `g = 1.4\times10^{-12}\ {\rm GeV}^{-1}`:
+  - 1% に届くのに約 `4.66\times10^1` 倍
+  - 10% に届くのに約 `4.66\times10^2` 倍
+  - 100% に届くのに約 `4.66\times10^3` 倍
+- `g = 4.0\times10^{-12}\ {\rm GeV}^{-1}`:
+  - 1% に届くのに約 `5.70` 倍
+  - 10% に届くのに約 `5.70\times10^1` 倍
+  - 100% に届くのに約 `5.70\times10^2` 倍
+
+したがって、current surrogate normalization を modest に動かすだけでは
+observable-level large signal までは届きにくい。
+
+### `29`: amplitude-scaling sensitivity
+
+その後 `29-amplitude_scaling_sensitivity.py` で、
+Dvorkin-Smith-inspired な amplitude scaling を current linear choice より急にした場合に、
+parameter range の中でどれだけ template boost を稼げるかを点検した。
+
+ここでは
+
+```math
+D_{\rm peak} \propto (A/A_{\rm fid})^{p_{\rm amp}} (b/b_{\rm fid})^{p_b}
+```
+
+を仮定し、`p_{\rm amp}, p_b = 1,2,3` を試した。
+
+current scan range の中で得られる最大 boost は、
+
+```math
+p_{\rm amp}=3,\quad p_b=3
+```
+
+のときでも
+
+```math
+{\rm max\ boost} \simeq 3.27\times10^1
+```
+
+に留まった。
+
+これは、
+
+- high-`g` benchmark で 1% レベルに必要な `5.70` 倍は十分にカバーしうる
+- しかし high-`g` で 10% に必要な `57` 倍や、
+  low-`g` で 1% に必要な `46.6` 倍には current parameter range ではまだ届かない
+
+ことを意味する。
+
+現時点の解釈としては、
+
+- finer mass scan をしても conclusion は `$10^{-3}$` 級のまま
+- その原因は mass choice より template normalization 側にある
+- しかし、normalization をかなり aggressive にしても “すぐ large observable signal” とは言えない
+
+というところまで整理できた。
+
+### `30`: best-case scaled budget within the current parameter range
+
+最後に `30-bestcase_scaled_budget.py` で、
+`27b` の current best budget に `29` の最大 boost を掛け合わせ、
+**現在の parameter range の中で到達しうる best-case observable fraction** を見積もった。
+
+結果は
+
+- `g = 1.4\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  \max(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}})
+  \simeq 7.02\times10^{-3}
+  ```
+- `g = 4.0\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  \max(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}})
+  \simeq 5.73\times10^{-2}
+  ```
+
+だった。
+
+これは current surrogate family の中でかなり optimistic に見積もった上限であり、
+それでも
+
+- low-`g` ではまだ 1% 未満
+- high-`g` でも数 % レベル
+
+に留まる。
+
+したがって、少なくとも current parameter range の中では、
+template normalization を少し強めるだけで “current anisotropic-CB limit にかなり近い signal” を作ることは難しい、
+という理解がさらに強まった。

@@ -91,8 +91,9 @@ A_\tau^2 C_L^{\tau\tau}
 - 定式化自体は `HANDOFF.md` に整理されています。
 - toy spectrum を使った初期検証では、bubble scale に対応する $L \sim 300$ 付近で patchy 項が優勢になりうることが示唆されました。
 - ただし、これは unit-response と toy $C_L^{\tau\tau}$ を使った feasibility の話であり、そのまま physical な結論ではありません。
-- natural-unit への変換と Chandra benchmark の coupling を入れた現在の評価では、patchy contribution は anisotropic CB limit に対しておおよそ 1–10% レベルです。
-- したがって、現時点の主張は「patchy が必ず支配的」というより、「subdominant だが無視できない contribution になりうる」です。
+- `21/22` の thin-shell budget をそのまま使うと、patchy contribution は anisotropic CB limit に対して 1–10% レベルでした。
+- しかし `24/25/26/27` で finite-width visibility averaging を入れると、この見積もりは大きく suppress され、現在の surrogate template と benchmark coupling では最良点でも $10^{-3}$ 級です。
+- したがって、現時点の主張は「patchy が current limit にかなり近い」というものではなく、「finite-width treatment を入れると old thin-shell story は大きく弱まり、主張の中心は formal decomposition と suppression/caveat 側へ移る」です。
 - 元の feasibility notebook では、$\phi_{\rm ini}$ を小さくすると応答係数 $A$ が線形に縮まず、場合によっては符号まで反転する問題がありました。
 - この問題は現在、物理ではなく数値設定に由来するものだと分かっています。
 
@@ -226,6 +227,22 @@ dense output と unit-response rescaling を使う現在の方法では、線形
   - $m_{\rm res} = 1.023963 \times 10^{-29}\,{\rm eV}$ では $A_{\rm eff}/A_{\rm unit} \simeq 0.734$
   となり、finite-width reionization を入れると本命は old thin-shell の $m_{\rm best}$ よりも $m_{\rm res}$ 近傍に移ることが示唆されます。
 - `25/26/27` では $m_{\rm res}$ 近傍を finer scan し、visibility-weighted な natural-unit budget を再評価しました。現在の surrogate $C_L^{\tau\tau}$ と benchmark coupling の下では、最良点でも patchy contribution は anisotropic-CB limit の $10^{-3}$ 級に留まっています。
+- `28` では、この $10^{-3}$ 級の結果を 1%, 10%, 100% レベルへ押し上げるのに必要な template-normalization boost を逆算しました。best point でも
+  - $g = 1.4 \times 10^{-12}\,{\rm GeV}^{-1}$ なら 1% に届くのに約 $4.7\times 10^1$ 倍
+  - $g = 4.0 \times 10^{-12}\,{\rm GeV}^{-1}$ でも 1% に届くのに約 $5.7$ 倍
+  が必要です。
+- `29` では、Dvorkin-Smith-inspired amplitude scaling を current linear choice より急にしても十分かを点検しました。現在の parameter range では
+  ```math
+  D_{\rm peak} \propto (A/A_{\rm fid})^{p_{\rm amp}} (b/b_{\rm fid})^{p_b}
+  ```
+  として $p_{\rm amp}, p_b \le 3$ まで強めても、最大 boost は約 $3.27\times 10^1$ に留まります。したがって current surrogate setup のままでは、
+  - high-$g$ benchmark で 1% レベルに届く余地はある
+  - 10% や 100% レベルへ押し上げるのはまだ難しい
+  というのが current best reading です。
+- `30` では `27b` の budget と `29` の最大 boost を組み合わせ、current parameter range 内での best-case observable fraction を見積もりました。その結果、
+  - $g = 1.4 \times 10^{-12}\,{\rm GeV}^{-1}$ では約 $7.0\times10^{-3}$（0.7%）
+  - $g = 4.0 \times 10^{-12}\,{\rm GeV}^{-1}$ でも約 $5.7\times10^{-2}$（5.7%）
+  が current range での上限目安です。
 
 ## 次の科学的ステップ
 
@@ -233,10 +250,10 @@ dense output と unit-response rescaling を使う現在の方法では、線形
 2. $m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 付近を中心に、spatial resonance の可能性を優先的に検証する
 3. $A_{\rm eff}$ を使って、$m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 近傍の natural-unit budget を再評価する
 4. Dvorkin-Smith 系の $C_L^{\tau\tau}$ template の正規化を、より文献寄りにする
-5. この $10^{-3}$ 級の結論が template normalization にどれだけ依存するかを切り分ける
-6. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ の benchmark を追加する
-7. その後で必要なら cross spectrum の扱いを深める
+5. `30` を踏まえて、current parameter range の best-case でもどこまでしか行かないかを文献値と照合する
+6. それでも小さいなら、paper framing を finite-width suppression と constraint reinterpretation caveat に確定する
+7. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ の benchmark を追加する
 
 ## 重要な注意
 
-toy model で得られる大きな $R_\tau$ は、feasibility を考える手がかりとしては有用ですが、それ自体が最終的な物理結果ではありません。現在の中心結果は、natural-unit と現実的 coupling を入れると patchy contribution は percent-to-ten-percent level に落ち着く、という点です。
+toy model で得られる大きな $R_\tau$ は、feasibility を考える手がかりとしては有用ですが、それ自体が最終的な物理結果ではありません。現在の中心結果は、thin-shell では 1–10% レベルに見えた patchy contribution が、finite-width visibility averaging を入れると current surrogate setup では $10^{-3}$ 級まで下がる、という点です。
