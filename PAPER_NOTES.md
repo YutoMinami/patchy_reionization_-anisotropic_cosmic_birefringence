@@ -313,3 +313,45 @@ visibility-weighted response を直接計算した `24` によって、mass prio
 - `$A_{\rm eff}$ を使った natural-unit budget near $m_{\rm res}$`
 
 に置き換えるのが自然である。
+
+## `25/26/27` を踏まえた更新
+
+finer scan と visibility-weighted budget update によって、さらに状況がはっきりした。
+
+- `$m_{\rm res}$` 近傍には確かに oscillatory structure がある
+- best point は `$m/m_{\rm res}=1$` ではなく
+  ```math
+  m/m_{\rm res} = 0.574349
+  ```
+  付近に移る
+- しかし、その best point でも current surrogate budget は
+  ```math
+  \max(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}})
+  \simeq 1.27\times10^{-3}
+  ```
+  に留まる
+
+つまり、いまの surrogate setup と benchmark coupling の下では、
+
+- “finite-width を入れても patchy が current limit にかなり近い”
+
+とはまだ言えない。
+
+現時点でより安全な paper framing は、
+
+- thin-shell で見えていた old `$m_{\rm best}$` story が finite-width averaging で大きく suppress されること
+- physically relevant window が `$m_{\rm res}\sim10^{-29}$` eV へ移ること
+- その近傍では sign-changing な structure が生じること
+- したがって、patchy term の評価には finite-width treatment が essential であること
+
+である。
+
+もし Dvorkin-Smith 系 template のより physical な normalization を入れてもなお `$10^{-3}$` 級なら、paper の中心は
+
+- “observable-level large signal”
+
+ではなく、
+
+- “formal decomposition + finite-width suppression + reinterpretation caveat”
+
+に置くのが自然になる。

@@ -1184,3 +1184,111 @@ A_{\rm eff}(m_a)
 1. `22` 相当の natural-unit budget を、$A_{\rm unit}$ ではなく $A_{\rm eff}$ を使って **$m_{\rm res}$ 近傍で再評価** する
 2. $m_{\rm res}$ 近傍を finer mass grid で再走査し、$A_{\rm eff}/A_{\rm unit}$ の oscillatory structure をより丁寧に見る
 3. 可能であれば、その後に full line-of-sight integral へ進み、visibility averaging と spatial matching の両方を含めた patchy contribution を評価する
+
+---
+
+## $m_{\rm res}$ 近傍の finer scan と budget 再評価: `25/26/27` (2026-04-05)
+
+### `25`: finer scan around $m_{\rm res}$
+
+`24` では $m_{\rm res}$ 近傍で $A_{\rm eff}/A_{\rm unit}$ が単調ではなく、符号反転を伴うことが見えた。そこで `25` では
+
+```math
+0.5 \le m/m_{\rm res} \le 2.0
+```
+
+を 31 点で finer scan し、oscillatory structure を直接見た。
+
+結果として、
+
+- `m/m_res = 1.000000` では
+  ```math
+  A_{\rm eff}/A_{\rm unit} = 0.733941
+  ```
+- しかし最大の physical relevance を持つ点は必ずしも `m/m_res = 1` ではなく、
+  ```math
+  m/m_{\rm res} = 0.574349
+  ```
+  付近でも
+  ```math
+  A_{\rm eff}/A_{\rm unit} = 0.144709
+  ```
+  となる
+
+という、かなり oscillatory な構造が見えた。
+
+### `26`: natural-unit への写像
+
+`25` の CSV を `21` と同じ natural-unit logic で再解釈し、visibility-weighted な physical coefficient
+
+```math
+A_{\tau,{\rm eff}}^{\rm physical}
+```
+
+を mass ごとに作った。
+
+重要なのは、`A_{\rm eff}/A_{\rm unit}` の最大が `m/m_res = 1` でも、physical coefficient の最大はそこではない点である。
+
+今回の scan では、
+
+- `g = 1.4\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  |A_{\tau,{\rm eff}}^{\rm physical}|_{\max}
+  =
+  2.316157\times10^{-2}
+  ```
+- `g = 4.0\times10^{-12}\ {\rm GeV}^{-1}` で
+  ```math
+  |A_{\tau,{\rm eff}}^{\rm physical}|_{\max}
+  =
+  6.617593\times10^{-2}
+  ```
+
+が得られ、その位置はいずれも
+
+```math
+m/m_{\rm res} = 0.574349
+```
+
+だった。
+
+### `27`: visibility-weighted budget near $m_{\rm res}$
+
+最後に `26` の $A_{\tau,{\rm eff}}^{\rm physical}$ を使って、`22` 相当の natural-unit budget を $m_{\rm res}$ 近傍でやり直した。
+
+このとき最も効く点は
+
+- `g = 4.0\times10^{-12}\ {\rm GeV}^{-1}`
+- `m/m_res = 0.574349`
+- `m = 5.881123\times10^{-30}\ {\rm eV}`
+
+であり、peak multipole `L = 289` で
+
+```math
+\max \left(\frac{D_L^{\alpha\alpha,\tau,{\rm eff}}}{D_L^{\alpha\alpha,{\rm lim}}}\right)
+=
+1.269983\times10^{-3}
+```
+
+となった。
+
+### 現時点での解釈
+
+ここまでで状況はかなり整理された。
+
+- thin-shell の old `$m_{\rm best}$` point は finite-width averaging でほぼ消える
+- `$m_{\rm res}$` 近傍には確かに structure がある
+- しかし、現在の surrogate template と Chandra benchmark coupling の下では、visibility-weighted patchy contribution は anisotropic-CB limit に対して **せいぜい $10^{-3}$ 級** に留まる
+
+つまり、今の setup では
+
+- `22` の 1–10% level は realistic visibility averaging を入れるとかなり下がる
+- `$m_{\rm res}$` 近傍を丁寧に見ても、今の surrogate budget ではまだ observational limit からかなり遠い
+
+というのが current best reading である。
+
+### 次のステップ
+
+1. `27b` を見ながら、この $10^{-3}$ 級という結論が surrogate template の normalization にどれだけ依存しているかを整理する
+2. Dvorkin-Smith 系 template の normalization をより物理的に寄せて再評価する
+3. それでも小さいなら、paper claim は “observable-level importance” より “formal decomposition, finite-width suppression, and reinterpretation caveat” に寄せる

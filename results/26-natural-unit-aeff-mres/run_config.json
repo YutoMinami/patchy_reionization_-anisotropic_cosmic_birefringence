@@ -1,0 +1,10 @@
+{
+  "visibility_csv": "results/25-visibility-mres-fine/visibility_aeff_mres_scan.csv",
+  "z_eval": 7.7,
+  "f_dm": 1.0,
+  "g_values": [
+    1.4e-12,
+    4e-12
+  ],
+  "output_dir": "results/26-natural-unit-aeff-mres"
+}

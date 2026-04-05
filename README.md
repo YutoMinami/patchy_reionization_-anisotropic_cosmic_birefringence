@@ -225,14 +225,15 @@ dense output と unit-response rescaling を使う現在の方法では、線形
   - $m_{\rm best} = 5.878016 \times 10^{-27}\,{\rm eV}$ では $A_{\rm eff}/A_{\rm unit} \simeq 0.0148$
   - $m_{\rm res} = 1.023963 \times 10^{-29}\,{\rm eV}$ では $A_{\rm eff}/A_{\rm unit} \simeq 0.734$
   となり、finite-width reionization を入れると本命は old thin-shell の $m_{\rm best}$ よりも $m_{\rm res}$ 近傍に移ることが示唆されます。
+- `25/26/27` では $m_{\rm res}$ 近傍を finer scan し、visibility-weighted な natural-unit budget を再評価しました。現在の surrogate $C_L^{\tau\tau}$ と benchmark coupling の下では、最良点でも patchy contribution は anisotropic-CB limit の $10^{-3}$ 級に留まっています。
 
 ## 次の科学的ステップ
 
 1. natural-unit pipeline を正本として、anisotropic-CB reinterpretation を raw quantity ではなく physical quantity でやり直す
 2. $m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 付近を中心に、spatial resonance の可能性を優先的に検証する
 3. $A_{\rm eff}$ を使って、$m_{\rm res} \sim 10^{-29}\,{\rm eV}$ 近傍の natural-unit budget を再評価する
-4. $m_{\rm res}$ 近傍を finer mass grid で再走査し、visibility averaging の oscillatory structure を確認する
-5. Dvorkin-Smith 系の $C_L^{\tau\tau}$ template の正規化を、より文献寄りにする
+4. Dvorkin-Smith 系の $C_L^{\tau\tau}$ template の正規化を、より文献寄りにする
+5. この $10^{-3}$ 級の結論が template normalization にどれだけ依存するかを切り分ける
 6. 必要なら isotropic CB benchmark と組み合わせて $g_{a\gamma}$ の benchmark を追加する
 7. その後で必要なら cross spectrum の扱いを深める
 

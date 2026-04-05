@@ -569,3 +569,40 @@ A_\tau^{\rm physical,\,corrected} \simeq 0.015 \times (0.16\text{–}0.45) \sime
 reducing the patchy contribution at $m_{\rm best}$ from 1–10% of the anisotropic CB limit to roughly **0.02–0.1%**. The `21`/`22` results remain valid as thin-shell upper bounds, but they should not be quoted as the realistic amplitude at $m_{\rm best}$.
 
 At $m_{\rm res}$, the suppression factor is only ~0.73, so the budget there is closer to the thin-shell estimate. The natural next step is to redo the `21`/`22`-style natural-unit budget **at $m_{\rm res}$** using $A_{\rm eff}$ rather than $A_{\rm unit}$.
+
+Update after `25/26/27`:
+
+- the finer scan around `$m_{\rm res}$` shows a genuinely oscillatory structure in `$A_{\rm eff}/A_{\rm unit}$`
+- the largest visibility-weighted physical coefficient in the current scan occurs at
+  ```math
+  m/m_{\rm res} = 0.574349
+  ```
+  rather than exactly at `$m/m_{\rm res}=1$`
+- for the Chandra benchmark couplings, this gives
+  ```math
+  |A_{\tau,{\rm eff}}^{\rm physical}|_{\max}
+  \simeq 2.32\times10^{-2}
+  \quad {\rm or} \quad
+  6.62\times10^{-2}
+  ```
+  for `$g=1.4\times10^{-12}$` and `$4.0\times10^{-12}\ {\rm GeV}^{-1}$`
+
+Most importantly, the budget re-evaluation in `27` gives only
+
+```math
+\max\left(D_L^{\alpha\alpha,\tau,{\rm eff}}/D_L^{\alpha\alpha,{\rm lim}}\right)
+\simeq 1.27\times10^{-3}
+```
+
+at the best point of the current scan.
+
+So the current best reading is:
+
+- finite-width reionization strongly weakens the old thin-shell story
+- `$m_{\rm res}$` is still the right place to look for any surviving structure
+- but with the current surrogate `$C_L^{\tau\tau}$` normalization and benchmark couplings, the observable-level patchy signal is only at the `$10^{-3}$` level of the current anisotropic-CB limit
+
+This makes the next scientific question more specific:
+
+- is the remaining suppression mainly due to the surrogate template normalization,
+- or is the realistic paper claim actually about the formal decomposition and finite-width suppression itself rather than an observable-level large signal?
