@@ -12,6 +12,8 @@ The main conclusion is therefore methodological rather than discovery-driven. Fo
 
 Patchy reionization induces an effective anisotropic birefringence term by modulating the effective photon emission time. Whether this term is phenomenologically important depends on the ALP time derivative during reionization and on how that time-dependent response averages across the finite thickness of the visibility function. A thin-shell treatment is a useful first diagnostic because it evaluates the ALP time derivative at a single effective reionization time. This isolates the response coefficient that converts optical-depth fluctuations into birefringence fluctuations, and it makes clear where the mass dependence of the effect enters.
 
+There is a simple reason to expect the effect to be small: patchy reionization is a secondary modulation, and optical-depth fluctuations are themselves limited in amplitude. However, that naive expectation is not by itself decisive. If the characteristic bubble scale is comparable to the ALP oscillation scale during reionization, the line-of-sight response can sample the ALP phase coherently rather than averaging it away. This scale-matching possibility motivates an explicit calculation rather than assuming from the outset that the patchy contribution is negligible.
+
 The observable quantity, however, is not the local thin-shell response itself. What matters is the visibility-weighted response after integrating across the finite thickness of reionization. The calculation therefore has two logically distinct roles: the thin-shell limit identifies the potentially relevant mass scales, while the finite-width calculation determines how much of that response survives in an observable birefringence spectrum. This leads to three questions:
 
 - What is actually constrained by current anisotropic-CB limits?
@@ -124,6 +126,8 @@ the suppression is much weaker,
 
 and the physically interesting window shifts toward the $m_{\rm res}$ region. A finer scan (201 points) showed that the response there is oscillatory and sign-changing as a function of mass, because the ALP oscillation phase at reionization shifts continuously with $m_a$. The current best point appears near $m/m_{\rm res} \simeq 0.895$.
 
+Here $m_{\rm res}$ is defined using the fiducial characteristic bubble scale in the surrogate template. Changing the effective bubble radius would shift the scale-matching mass, so the numerical value above should be read as the resonance location for the fiducial template rather than as a universal mass. In the visibility-weighted scan used for the budget below, the bubble scale is kept fixed and the ALP mass is varied around this fiducial $m_{\rm res}$.
+
 ![A_eff/A_unit vs m/m_res](figures/fig1_aeff_over_aunit.png)
 
 *Figure 1. Visibility-averaged suppression factor $A_{\rm eff}/A_{\rm unit}$ as a function of $m/m_{\rm res}$ from the 201-point fine scan. The response is oscillatory and sign-changing. The vertical dotted line marks $m = m_{\rm res}$. The thin-shell limit corresponds to $A_{\rm eff}/A_{\rm unit} = 1$.*
@@ -144,6 +148,8 @@ This already indicates that the finite-width effect is not a minor correction: i
 ## 4. Normalization Sensitivity
 
 The remaining major uncertainty is the normalization of the surrogate $C_L^{\tau\tau}$ template. To quantify this, we asked how much the template normalization would need to be boosted in order to raise the patchy contribution to selected fractions of the current anisotropic-CB limit. The surrogate family itself was inspired by the Dvorkin-Smith patchy-reionization framework [3].
+
+The template also contains a characteristic bubble scale, represented by an effective radius $R_{\rm eff}$, which sets the approximate peak multipole through $L_{\rm peak}\sim \chi(z_{\rm re})/R_{\rm eff}$. In this note the visibility-weighted budget is evaluated at the fiducial scale corresponding to $(\bar R,\sigma_{\ln R})=(5.0,0.693)$, giving $R_{\rm eff}\simeq 34.1$ Mpc and $L_{\rm peak}\simeq 289$. We estimated how the scale-matching mass would move for a plausible range of $R_{\rm eff}$, but the budget calculation itself is not a full joint scan over bubble size, template normalization, and ALP mass.
 
 For the current best visibility-weighted point, the required boosts are:
 

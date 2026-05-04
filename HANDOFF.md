@@ -662,3 +662,35 @@ with the largest available `29` boost inside the current `(tau, Delta y, b)` ran
 So, even under a deliberately optimistic reading of the current surrogate family,
 the signal remains below the current anisotropic-CB limit and reaches at most the few-percent level
 for the higher benchmark coupling.
+
+---
+
+## Methodological note framing update
+
+`METHODOLOGICAL_NOTE.md` has been revised into a more self-contained internal note for collaborators.
+
+Main wording changes:
+
+- Removed project-history narration such as "early toy analysis", "old thin-shell story", and "why this may still be worth keeping".
+- Reframed the first-stage calculation as a **reference thin-shell estimate** rather than an old toy result.
+- Added the explicit response definition
+  ```math
+  A_{\rm unit}(m_a)
+  =
+  \left[
+  \dot\phi_{\rm conf}\frac{d\eta}{d\tau}
+  \right]_{\phi_{\rm ini}=1}.
+  ```
+- Added the motivation that the patchy term is naively expected to be small, but scale matching between the characteristic bubble size and the ALP oscillation scale could in principle make the response non-negligible.
+- Clarified the main conclusion:
+  - formally, anisotropic-CB constraints apply to the **total** birefringence power;
+  - however, in the current visibility-weighted surrogate calculation, the patchy-induced term is small enough that current limits can still be interpreted, to good approximation, as constraints on the genuine ALP fluctuation term.
+- Clarified the bubble-scale treatment:
+  - the visibility-weighted budget uses the fiducial bubble scale, with `(Rbar, siglnR) = (5.0, 0.693)`;
+  - this gives `R_eff ~= 34.1 Mpc`, `L_peak ~= 289`, and fiducial `m_res ~= 1.024e-29 eV`;
+  - the later `m_res` scan varies ALP mass around this fiducial resonance while holding the bubble scale fixed;
+  - `23` estimated how `m_res` would move for a plausible `R_eff` range, but the current budget is **not** a full joint scan over bubble size, template normalization, and ALP mass.
+
+The intended final message of the note is now:
+
+> The total-power viewpoint is formally correct and is the right framework for future higher-precision data or more extreme reionization templates. For the present visibility-weighted surrogate setup, however, patchy reionization does not significantly contaminate current anisotropic-CB constraints, so the conventional interpretation as a genuine-ALP-fluctuation constraint remains a good approximation.
